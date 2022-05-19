@@ -1,7 +1,19 @@
+using DAL.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddTransient<LeadSubContext,LeadSubContext>();
+
+
 builder.Services.AddControllersWithViews();
+string str=builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<LeadSubContext>(options =>
+{
+    options.UseSqlServer(str);
+});
 
 var app = builder.Build();
 
