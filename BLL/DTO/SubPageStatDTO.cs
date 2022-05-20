@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Context
+namespace BLL.DTO
 {
-    public class SubPageStat
+    public class SubPageStatDTO
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -14,6 +14,5 @@ namespace DAL.Context
         public int Views { get; set; }
 
         public int SubPageId { get; set; }
-        public virtual SubPage SubPage { get; set; }
     }
 }

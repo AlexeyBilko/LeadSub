@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Context
+namespace BLL.DTO
 {
-    public class BilledPages
+    public class BilledPagesDTO
     {
         public int Id { get; set; }
-        public virtual ICollection<SubPage> SubPages{ get; set; }
+       // public virtual ICollection<SubPageDTO> SubPages { get; set; }
     }
 }
