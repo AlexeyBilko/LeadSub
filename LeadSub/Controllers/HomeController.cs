@@ -7,11 +7,10 @@ namespace LeadSub.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         LeadSubContext context;
-        public HomeController(ILogger<HomeController> logger, LeadSubContext context)
+
+        public HomeController(LeadSubContext context)
         {
-            _logger = logger;
             this.context = context;
 
         }
@@ -24,18 +23,18 @@ namespace LeadSub.Controllers
                 Description="",
                 GetButtonTitle="",
                 SuccessButtonTitle="",
-              MainImage ="",
-      SuccessDescription ="",
+                MainImage ="",
+                SuccessDescription ="",
       
-       SubscriptionsCount ="",
-       ViewsCount ="",
-       UserLogin="",
-       InstagramLink="",
-       MaterialLink ="",
-        Title ="",
-        Header =""
+                SubscriptionsCount ="",
+                ViewsCount ="",
+                UserLogin="",
+                InstagramLink="",
+                MaterialLink ="",
+                Title ="",
+                Header =""
 
-    });
+            });
             context.SaveChanges();
             return View();
 
