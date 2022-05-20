@@ -1,19 +1,18 @@
+using BLL.Extensions;
 using DAL.Context;
-using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddTransient<LeadSubContext,LeadSubContext>();
-
-
 builder.Services.AddControllersWithViews();
-string str=builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<LeadSubContext>(options =>
-{
-    options.UseSqlServer(str);
-});
+//data source=DESKTOP-4CMION6\\SQLEXPRESS; 
+string str = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddLeadSubDbContext(str);
+builder.Services.AddLeadSubDataTransients();
+
 
 var app = builder.Build();
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class SubPagesStatService : GenericService<SubPageStat, SubPageDTO>
+    public class SubPagesStatService : GenericService<SubPageStat, SubPageStatDTO>
     {
         public SubPagesStatService(IRepository<SubPageStat> repository) : base(repository)
         {
