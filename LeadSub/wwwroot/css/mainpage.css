@@ -315,6 +315,7 @@ a {
     text-align: center;
     justify-content: center;
     align-items: center;
+    margin-bottom: 120px;
 }
 
 .price {
@@ -368,4 +369,33 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+}
+
+.faq-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 25px;
+    margin-top: -20px;
+}
+
+    .faq-block div {
+        margin: 20px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+.question {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    color: #000000;
+}
+
+.answer {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #626262;
 }
