@@ -182,3 +182,27 @@ a {
     font-size: 24px;
     margin-bottom: 40px;
 }
+
+.how_work_steps{
+    text-align: center;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.arrow{
+    text-align: center;
+}
+
+.arrow img {
+    z-index: 0;
+    width: 5%;
+    height: auto;
+}
+
+.text {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
