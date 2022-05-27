@@ -1,0 +1,15 @@
+﻿@model LeadSub.Models.ViewModels.LoginViewModel
+
+<div class="container-fluid col-xl-5">
+
+    <form method="post" action="~/Account/Login" class="mt-5">
+        @Html.HiddenFor(x=>x.ReturnUrl)
+        <input type="email" asp-for="Email" class="form-control w-100" placeholder="Your email" />
+        <span class="text-danger d-block" asp-validation-for="Email"></span>
+        <input type="password" asp-for="Password" class="form-control mt-4" placeholder="Your password" />
+        <span class="text-danger d-block" asp-validation-for="Password"></span>
+        <input type="submit" class="btn btn-success align-content-center mt-2" value="Войти" />
+    </form>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+</div>
