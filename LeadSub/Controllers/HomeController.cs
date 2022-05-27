@@ -15,9 +15,9 @@ namespace LeadSub.Controllers
             subPagesService = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-           
+            await subPagesService.AddAsync(new BLL.DTO.SubPageDTO());
             return View();
 
         }
