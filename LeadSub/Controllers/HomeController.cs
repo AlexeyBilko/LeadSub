@@ -10,12 +10,9 @@ namespace LeadSub.Controllers
     {
         //LeadSubContext context;
         private SubPagesService subPagesService;
-        private AspNetIdentityContext AspNetIdentityContext;
-        public HomeController(SubPagesService service, AspNetIdentityContext aspNetIdentityContext)
+        public HomeController(SubPagesService service)
         {
             subPagesService = service;
-            aspNetIdentityContext.Users.Add(new Models.User());
-            aspNetIdentityContext.SaveChanges();
         }
 
         public async Task<IActionResult> Index()
