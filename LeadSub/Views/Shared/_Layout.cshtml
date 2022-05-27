@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LeadSub.styles.css" asp-append-version="true" />
+    <link href="css/site.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -14,11 +15,53 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <footer class="main-footer">
+            <div class="footer-logo">
+                <a href="/" class="main-logo">Lead<span style="color: #3362DB">Sub</span></a>
+            </div>
+            <div class="col-xxl-4 make-center">
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="/images/instagram-logo.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">Instagram</p>
+                    </a>
+
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="~/images/youtube-logo.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">YouTube</p>
+                    </a>
+                
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="~/images/Twitter-logo.svg.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">Twitter</p>
+                    </a>
+            </div>
+
+                <div class="footer-links">
+                    <div>
+                        <a href="/" class="footer-link">FAQ</a>
+                    </div>
+                    <div>
+                        <a href="/" class="footer-link">Pricing</a>
+                    </div>
+                    <div>
+                        <a href="/" class="footer-link">Contact Us</a>
+                    </div>
+                </div>
+        </footer>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
 </body>
 </html>
