@@ -32,7 +32,9 @@ string identityConnection = builder.Configuration.GetConnectionString("IdentityC
 
 builder.Services.AddDbContext<AspNetIdentityContext>(options => options.UseSqlServer(identityConnection));
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AspNetIdentityContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AspNetIdentityContext>()
+    .AddEntityFrameworkStores<AspNetIdentityContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddSession();
 

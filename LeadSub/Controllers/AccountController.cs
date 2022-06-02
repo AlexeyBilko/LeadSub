@@ -62,7 +62,8 @@ namespace LeadSub.Controllers
             }
             return View();
         }
-
+     
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -77,9 +78,13 @@ namespace LeadSub.Controllers
                 var res = await userManager.CreateAsync(user, model.Password);
                 if (res.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "User");
-                    await signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    var code= await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    await EmailManager.SendConfirmCodeAsync(user.Email, $"<h2>Код подтверждения регистрации {code}</h2>");
+                    return View("ConfirmEmail",new ConfirmEmailViewModel
+                    {
+                        UserId=user.Id
+                    });
+                 
                 }
                 else
                 {
@@ -88,6 +93,38 @@ namespace LeadSub.Controllers
                         ModelState.AddModelError("", item.Description);
                     }
                 }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Code != null)
+                {
+                    var user = await userManager.FindByIdAsync(model.UserId);
+                    if (user != null)
+                    {
+                        var result = await userManager.ConfirmEmailAsync(user, model.Code);
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(user, "User");
+                            await signInManager.SignInAsync(user, false);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            foreach (var item in result.Errors)
+                            {
+                                ModelState.AddModelError("", item.Description);
+                            }
+                        }
+                    }
+                }
+                return View();
             }
             return View();
         }
