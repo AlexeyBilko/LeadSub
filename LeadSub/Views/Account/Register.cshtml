@@ -18,7 +18,7 @@
         <div class="shape"></div>
     </div>
     <form method="post" action="~/Account/Register" class="mt-5">
-        <h3>Login</h3>
+        <h3>Register</h3>
 
         <label asp-validation-for="UserName">Name</label>
         <input type="text" asp-for="UserName" placeholder="-" />
@@ -28,8 +28,10 @@
         <input type="password" asp-for="Password" placeholder="-" />
         <label asp-validation-for="ConfirmPassword">Confirm Password</label>
         <input type="password" asp-for="ConfirmPassword" placeholder="-" />
-
+        
         <input class="button-login"type="submit" value="Log In" />
+
+        <a class="link" href="~/Account/Login">I already have an account</a>
 
     </form>
     <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
