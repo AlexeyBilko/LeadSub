@@ -23,10 +23,21 @@ body {
     text-align: center !important;
     margin-top: -30px;
     margin-bottom: 40px;
+    margin-top: 40px;
 }
 
 .footer-logo{
     margin: auto;
+}
+
+.footer-main-logo {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    margin: 0px;
+    color: inherit !important;
+    color: #000000;
 }
 
 .footer-links {

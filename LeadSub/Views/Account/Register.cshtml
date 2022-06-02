@@ -1,17 +1,36 @@
 ﻿@model LeadSub.Models.ViewModels.RegisterViewModel
+@{
+    
+}
 
-<div class="container-fluid col-xl-5" >
-   
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/mainpage.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/account.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="shape"></div>
+    </div>
     <form method="post" action="~/Account/Register" class="mt-5">
-        <input type="text" asp-for="UserName" class="form-control" placeholder="@nameof(Model.UserName)" />
-        <span class="text-danger d-block" asp-validation-for="UserName"></span>
-        <input type="email" asp-for="Email" class="form-control mt-2" placeholder="@nameof(Model.Email)" />
-        <span class="text-danger d-block" asp-validation-for="Email"></span>
-        <input type="password" asp-for="Password" class="form-control mt-2" placeholder="@nameof(Model.Password)" />
-        <span class="text-danger d-block" asp-validation-for="Password"></span>
-        <input type="password" asp-for="ConfirmPassword" class="form-control mt-2" placeholder="@nameof(Model.ConfirmPassword)" />
-        <span class="text-danger d-block" asp-validation-for="ConfirmPassword"></span>
-        <input type="submit" class="btn btn-success mt-2 d-block mx-auto mt-3" value="Зарегистрироваться" />
+        <h3>Login</h3>
+
+        <label asp-validation-for="UserName">Name</label>
+        <input type="text" asp-for="UserName" placeholder="-" />
+        <label asp-validation-for="Email">Email</label>
+        <input type="email" asp-for="Email" placeholder="-" />
+        <label asp-validation-for="Password">Password</label>
+        <input type="password" asp-for="Password" placeholder="-" />
+        <label asp-validation-for="ConfirmPassword">Confirm Password</label>
+        <input type="password" asp-for="ConfirmPassword" placeholder="-" />
+
+        <input class="button-login"type="submit" value="Log In" />
+
     </form>
     <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
-</div>
+</body>
