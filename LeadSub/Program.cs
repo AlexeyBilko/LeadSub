@@ -6,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    options.ListenAnyIP(7100, configure => configure.UseHttps()); // to listen for incoming https connection on port 7001
+//});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -26,6 +31,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     options.User.RequireUniqueEmail = true;
 });
+
+
 
 
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
