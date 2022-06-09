@@ -6,15 +6,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using EASendMail;
+
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth;
+
+using EASendMail;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Services;
 
 namespace LeadSub.Models
 {
     public class EmailManager
     {
-        private static async Task<(string,string)> GetToken()
+        public static async Task<(string,string)> GetToken()
         {
             var credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
             new ClientSecrets
@@ -34,16 +38,23 @@ namespace LeadSub.Models
                 credential.Token.AccessToken
                 );
         }
-        public static Task SendConfirmCodeAsync(string to,string text)
+        
+        public static Task SendConfirmCodeAsync(string to,string text,string from,string accessToken)
         {
             return Task.Run(async () =>
             {
                 try
                 {
+
+                   /*var service = new GmailService(new BaseClientService.Initializer
+                    {
+                        HttpClientInitializer = credentials
+                    });
+                    //service.
                     // Gmail SMTP server address
                     var res = await GetToken();
-
-                    SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+                   //credentials.E
+                    /*SmtpServer oServer = new SmtpServer("smtp.gmail.com");
                     // enable SSL connection
                     oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
                     // Using 587 port, you can also use 465 port
@@ -69,12 +80,31 @@ namespace LeadSub.Models
                     SmtpClient oSmtp = new SmtpClient();
                     oSmtp.SendMail(oServer, oMail);
 
-                    Console.WriteLine("The email has been submitted to server successfully!");
+                    Console.WriteLine("The email has been submitted to server successfully!");*/
                 }
                 catch (Exception ep)
                 {
                     Console.WriteLine("Exception: {0}", ep.Message);
                 }
+
+
+
+                /*string sender = "mittsykh@ukr.net";
+                MailAddress send = new MailAddress(sender, "LeadSub Manager");
+                MailAddress to = new MailAddress(toemail);
+                MailMessage message = new MailMessage(send, to);
+                message.Body = "<h1>Helloworld</h1>";
+              
+
+                message.IsBodyHtml = true;
+                ImapClie
+                SmtpClient smtp = new SmtpClient("smtp.ukr.net", 465);
+                smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(sender, "YbWAtsxyffUOVQnd");
+                smtp.Send(message);
+                return true;*/
+
+
             });
            
         }
