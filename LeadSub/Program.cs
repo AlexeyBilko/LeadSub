@@ -35,8 +35,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 
-
-
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 
 //builder.Services.AddDbContext<AspNetIdentityContext>(options => options.UseSqlServer(identityConnection));
