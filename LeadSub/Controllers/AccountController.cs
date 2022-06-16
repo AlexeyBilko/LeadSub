@@ -41,6 +41,16 @@ namespace LeadSub.Controllers
             return View();
         }
 
+        public IActionResult ConfirmEmail()
+        {
+            return View();
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -70,8 +80,8 @@ namespace LeadSub.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [GoogleScopedAuthorize(GmailService.ScopeConstants.GmailCompose)]
-        public async Task<IActionResult> Register(RegisterViewModel model, [FromServices] IGoogleAuthProvider auth)
+        //[GoogleScopedAuthorize(GmailService.ScopeConstants.GmailCompose)]
+        public async Task<IActionResult> Register(RegisterViewModel model)//[FromServices] IGoogleAuthProvider auth)
         {
             if (ModelState.IsValid)
             {
@@ -83,10 +93,10 @@ namespace LeadSub.Controllers
                 var res = await userManager.CreateAsync(user, model.Password);
                 if (res.Succeeded)
                 {
-                    var code= await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //GoogleCredential cred = await auth.GetCredentialAsync();
+                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //GoogleCredential credentails = await auth.GetCredentialAsync();
                     var credentails = await EmailManager.GetToken();
-                    await EmailManager.SendConfirmCodeAsync(user.Email, $"<h2>Код подтверждения регистрации {code}</h2>",credentails.Item1,credentails.Item2);
+                    await EmailManager.SendConfirmCodeAsync(user.Email, $"<h2>Код подтверждения регистрации {code}</h2>", credentails.Item1, credentails.Item2);
                     return View("ConfirmEmail",new ConfirmEmailViewModel
                     {
                         UserId=user.Id

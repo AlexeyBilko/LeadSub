@@ -13,6 +13,9 @@ using Google.Apis.Auth;
 using EASendMail;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.AspNetCore3;
 
 namespace LeadSub.Models
 {
@@ -20,16 +23,31 @@ namespace LeadSub.Models
     {
         public static async Task<(string,string)> GetToken()
         {
+            //ClientSecrets secrets = new ClientSecrets()
+            //{
+            //    ClientId = "757118647530-4q3qngsol7lso7c44ptiifi8kci5f16e.apps.googleusercontent.com",
+            //    ClientSecret = "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"
+            //};
+
+            //var credential = new UserCredential(new GoogleAuthorizationCodeFlow(
+            //    new GoogleAuthorizationCodeFlow.Initializer
+            //    {
+            //        ClientSecrets = secrets
+            //    }),
+            //    "user",
+            //    RefreshToken
+            //);
+
             var credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-            new ClientSecrets
-            {
-                 ClientId = "757118647530-4q3qngsol7lso7c44ptiifi8kci5f16e.apps.googleusercontent.com",
-                 ClientSecret = "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"
-            },
-            new[] { "email", "profile", "https://mail.google.com/" },
-            "user",
-            CancellationToken.None
-             );
+                new ClientSecrets
+                {
+                    ClientId = "757118647530-4q3qngsol7lso7c44ptiifi8kci5f16e.apps.googleusercontent.com",
+                    ClientSecret = "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"
+                },
+                new[] { "email", "profile", "https://mail.google.com/" },
+                "user",
+                CancellationToken.None
+            );
 
             var jwtPayload = GoogleJsonWebSignature.ValidateAsync(credential.Token.IdToken).Result;
             var username = jwtPayload.Email;
