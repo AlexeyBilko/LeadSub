@@ -35,37 +35,12 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 
-
-
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 
-builder.Services.AddDbContext<AspNetIdentityContext>(options => options.UseSqlServer(identityConnection));
+//builder.Services.AddDbContext<AspNetIdentityContext>(options => options.UseSqlServer(identityConnection));
 
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AspNetIdentityContext>()
-    .AddEntityFrameworkStores<AspNetIdentityContext>()
-    .AddDefaultTokenProviders();
 
 builder.Services.AddSession();
-
-builder.Services.AddAuthentication(o =>
-{
-    // This forces challenge results to be handled by Google OpenID Handler, so there's no
-    // need to add an AccountController that emits challenges for Login.
-    o.DefaultChallengeScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
-    // This forces forbid results to be handled by Google OpenID Handler, which checks if
-    // extra scopes are required and does automatic incremental auth.
-    o.DefaultForbidScheme = GoogleOpenIdConnectDefaults.AuthenticationScheme;
-    // Default scheme that will handle everything else.
-    // Once a user is authenticated, the OAuth2 token info is stored in cookies.
-    o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-})
-        .AddCookie()
-        .AddGoogleOpenIdConnect(options =>
-        {
-            options.ClientId = "757118647530-4q3qngsol7lso7c44ptiifi8kci5f16e.apps.googleusercontent.com";
-            options.ClientSecret = "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";
-        });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

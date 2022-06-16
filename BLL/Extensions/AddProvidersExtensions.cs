@@ -1,14 +1,10 @@
 ﻿using DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL.Services;
 using BLL.DTO;
 using DAL.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace BLL.Extensions
 {
@@ -20,6 +16,10 @@ namespace BLL.Extensions
             {
                 options.UseSqlServer(connectionStr);
             });
+
+            services.AddIdentityCore<User>().AddEntityFrameworkStores<LeadSubContext>()
+                .AddEntityFrameworkStores<LeadSubContext>();
+                //.AddDefaultTokenProviders();
 
         }
         public static void AddLeadSubDataTransients(this IServiceCollection services)

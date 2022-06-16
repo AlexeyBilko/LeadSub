@@ -12,7 +12,7 @@ namespace LeadSub.Controllers
 {
     public class AccountController : Controller
     {
-        UserManager<User> userManager;
+       /* UserManager<User> userManager;
         SignInManager<User> signInManager;
         RoleManager<IdentityRole> roleManager;
 
@@ -186,6 +186,6 @@ namespace LeadSub.Controllers
                 }
             }
             return View();
-        }
+        }*/
     }
 }
