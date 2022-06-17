@@ -19,7 +19,8 @@ namespace BLL.Extensions
 
             services.AddIdentityCore<User>().AddEntityFrameworkStores<LeadSubContext>()
                 .AddEntityFrameworkStores<LeadSubContext>();
-                //.AddDefaultTokenProviders();
+
+        
 
         }
         public static void AddLeadSubDataTransients(this IServiceCollection services)
