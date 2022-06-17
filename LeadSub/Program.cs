@@ -39,8 +39,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 
-//builder.Services.AddDbContext<AspNetIdentityContext>(options => options.UseSqlServer(identityConnection));
-
+builder.Services.AddIdentity<User, IdentityRole>()
+          .AddEntityFrameworkStores<LeadSubContext>()
+          .AddDefaultTokenProviders();
 
 builder.Services.AddSession();
 var app = builder.Build();

@@ -1,4 +1,5 @@
-﻿using Google.Apis.Auth;
+﻿using DAL.Context;
+using Google.Apis.Auth;
 using Google.Apis.Auth.AspNetCore3;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Gmail.v1;
@@ -12,7 +13,7 @@ namespace LeadSub.Controllers
 {
     public class AccountController : Controller
     {
-       /* UserManager<User> userManager;
+        UserManager<User> userManager;
         SignInManager<User> signInManager;
         RoleManager<IdentityRole> roleManager;
 
@@ -79,9 +80,8 @@ namespace LeadSub.Controllers
      
       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        //[GoogleScopedAuthorize(GmailService.ScopeConstants.GmailCompose)]
-        public async Task<IActionResult> Register(RegisterViewModel model)//[FromServices] IGoogleAuthProvider auth)
+        [ValidateAntiForgeryToken]   
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -94,9 +94,8 @@ namespace LeadSub.Controllers
                 if (res.Succeeded)
                 {
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //GoogleCredential credentails = await auth.GetCredentialAsync();
-                    var credentails = await EmailManager.GetToken();
-                    await EmailManager.SendConfirmCodeAsync(user.Email, $"<h2>Код подтверждения регистрации {code}</h2>", credentails.Item1, credentails.Item2);
+
+                    await EmailManager.SendText(user.Email, code);
                     return View("ConfirmEmail",new ConfirmEmailViewModel
                     {
                         UserId=user.Id
@@ -186,6 +185,6 @@ namespace LeadSub.Controllers
                 }
             }
             return View();
-        }*/
+        }
     }
 }
