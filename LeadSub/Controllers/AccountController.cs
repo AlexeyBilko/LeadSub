@@ -96,7 +96,7 @@ namespace LeadSub.Controllers
                     var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     await EmailManager.SendText(user.Email, code);
-                    return View("ConfirmEmail",new ConfirmEmailViewModel
+                    return View("ConfirmEmail", new ConfirmEmailViewModel
                     {
                         UserId=user.Id
                     });
@@ -119,7 +119,7 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Code != null)
+                if (model.Code != null && model.UserId != null)
                 {
                     var user = await userManager.FindByIdAsync(model.UserId);
                     if (user != null)
@@ -127,7 +127,7 @@ namespace LeadSub.Controllers
                         var result = await userManager.ConfirmEmailAsync(user, model.Code);
                         if (result.Succeeded)
                         {
-                            await userManager.AddToRoleAsync(user, "User");
+                            //await userManager.AddToRoleAsync(user, "User");
                             await signInManager.SignInAsync(user, false);
                             return RedirectToAction("Index", "Home");
                         }

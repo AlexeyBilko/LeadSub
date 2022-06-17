@@ -21,8 +21,14 @@
                 <a href="/">About Us</a>
             </div>
             <div class="top-main-button">
-
-                <a href="~/Account/Register" class="main-button-text">Sign Up</a>
+                @if(Context.User != null)
+                {
+                    <a href="~/Account/Register" class="main-button-text">Create Page</a>
+                }
+                else
+                {
+                    <a href="~/Account/Register" class="main-button-text">Sign Up</a>
+                }
 
             </div>
         </nav>
