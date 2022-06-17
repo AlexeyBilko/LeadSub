@@ -85,30 +85,30 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User
+                if (await userManager.FindByEmailAsync(model.Email) == null&&await userManager.FindByNameAsync(model.UserName)==null)
                 {
-                    Email = model.Email,
-                    UserName = model.UserName
-                };
-                var res = await userManager.CreateAsync(user, model.Password);
-                if (res.Succeeded)
-                {
-                    var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    await EmailManager.SendText(user.Email, code);
+                    Random rand = new Random();
+                    int code = rand.Next(100000, 999999);
+
+
+                    await EmailManager.SendText(model.Email, $"{code}");
                     return View("ConfirmEmail", new ConfirmEmailViewModel
                     {
-                        UserId=user.Id
+                        UserName=model.UserName,
+                        Email=model.Email,
+                        Code=code.ToString()
                     });
-                 
                 }
                 else
                 {
-                    foreach (var item in res.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
+                    ModelState.AddModelError("Email","This email or userName is alredy taken!");
                 }
+           
+            }
+            else
+            {
+                //ModelState.AddModelError("Email", "This email or userName is alredy taken!");
             }
             return View();
         }
@@ -119,29 +119,30 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Code != null && model.UserId != null)
+                if (model.ConfirmCode == model.Code) 
                 {
-                    var user = await userManager.FindByIdAsync(model.UserId);
-                    if (user != null)
+                    User user = new User
                     {
-                        var result = await userManager.ConfirmEmailAsync(user, model.Code);
-                        if (result.Succeeded)
+                        Email = model.Email,
+                        UserName = model.UserName
+                    };
+                    var result = await userManager.CreateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        await signInManager.SignInAsync(user, false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
                         {
-                            //await userManager.AddToRoleAsync(user, "User");
-                            await signInManager.SignInAsync(user, false);
-                            return RedirectToAction("Index", "Home");
-                        }
-                        else
-                        {
-                            foreach (var item in result.Errors)
-                            {
-                                ModelState.AddModelError("", item.Description);
-                            }
+                            ModelState.AddModelError("", item.Description);
                         }
                     }
                 }
-                return View();
             }
+                
             return View();
         }
 

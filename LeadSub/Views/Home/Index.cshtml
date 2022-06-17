@@ -21,7 +21,7 @@
                 <a href="/">About Us</a>
             </div>
             <div class="top-main-button">
-                @if(Context.User != null)
+                @if(User.Identity.IsAuthenticated)
                 {
                     <a href="~/Account/Register" class="main-button-text">Create Page</a>
                 }
