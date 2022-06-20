@@ -36,7 +36,10 @@ namespace LeadSub.Controllers
                 ReturnUrl = returnUrl
             });
         }
-
+        public IActionResult AccountInfo()
+        {
+            return View();
+        }
         public IActionResult Register()
         {
             return View();

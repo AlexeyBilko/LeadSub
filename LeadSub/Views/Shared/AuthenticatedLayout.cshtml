@@ -7,31 +7,45 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LeadSub.styles.css" asp-append-version="true" />
-    <link href="css/mainpage.css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="~/css/mainpage.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="container">
-         <div class="nav-bar">
-        <nav class="nav">
-            <a href="/" class="main-logo">Lead<span style="color: #3362DB">Sub</span></a>
-            <div class="main-menu-items">
-                <a href="/">How To Use</a>
-                <a href="/">Pricing</a>
-                <a href="/">About Us</a>
-            </div>
-            <div class="top-main-button">
-              <a href="~/Account/Register" class="main-button-text">Sign Up</a>
+ <div class="container">
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height:100px">
+        <a href="/" class="main-logo">Lead<span style="color: #3362DB">Sub</span></a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ms-5 me-5">
+          <a class="nav-link main-menu-item" aria-current="page" href="#">MySubPages</a>
+        </li>
+        <li class="nav-item ms-5 me-5">
+          <a class="nav-link main-menu-item" href="#">Billing</a>
+        </li>
+         <li class="nav-item ms-5 me-5">
+          <a class="nav-link main-menu-item" href="#">Links Page</a>
+        </li>
+         <li class="nav-item ms-5 me-5">
+          <div class="top-main-button ms-auto me-auto">
+              <a href="#" class="main-button-text">Create page</a>
 
             </div>
-        </nav>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-
-        <footer class="main-footer">
+                <footer class="main-footer">
     <div class="footer-logo">
         <a href="/" class="footer-main-logo">Lead<span style="color: #3362DB">Sub</span></a>
     </div>
@@ -70,6 +84,7 @@
             </div>
         </div>
 </footer>
+
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

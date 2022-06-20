@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = User.Identity.IsAuthenticated ? "/Views/Shared/AuthenticatedLayout.cshtml" : "/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -11,28 +12,6 @@
 </head>
 
 <body>
-
-    <div class="nav-bar">
-        <nav class="nav">
-            <a href="/" class="main-logo">Lead<span style="color: #3362DB">Sub</span></a>
-            <div class="main-menu-items">
-                <a href="/">How To Use</a>
-                <a href="/">Pricing</a>
-                <a href="/">About Us</a>
-            </div>
-            <div class="top-main-button">
-                @if(User.Identity.IsAuthenticated)
-                {
-                    <a href="~/Account/Register" class="main-button-text">Create Page</a>
-                }
-                else
-                {
-                    <a href="~/Account/Register" class="main-button-text">Sign Up</a>
-                }
-
-            </div>
-        </nav>
-    </div>
 
     <div class="main-text">
         <div class="front-message">
@@ -207,42 +186,3 @@
     </div>
 </body>
 
-<footer class="main-footer">
-    <div class="footer-logo">
-        <a href="/" class="footer-main-logo">Lead<span style="color: #3362DB">Sub</span></a>
-    </div>
-    <div class="col-xxl-4 make-center">
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="/images/instagram-logo.png"/>
-                </div>
-                <p class="ms-2 social-media-title">Instagram</p>
-            </a>
-
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="~/images/youtube-logo.png"/>
-                </div>
-                <p class="ms-2 social-media-title">YouTube</p>
-            </a>
-        
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="~/images/Twitter-logo.svg.png"/>
-                </div>
-                <p class="ms-2 social-media-title">Twitter</p>
-            </a>
-    </div>
-
-        <div class="footer-links">
-            <div>
-                <a href="/" class="footer-link">FAQ</a>
-            </div>
-            <div>
-                <a href="/" class="footer-link">Pricing</a>
-            </div>
-            <div>
-                <a href="/" class="footer-link">Contact Us</a>
-            </div>
-        </div>
-</footer>
