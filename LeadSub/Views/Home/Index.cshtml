@@ -3,16 +3,19 @@
     Layout = User.Identity.IsAuthenticated ? "/Views/Shared/AuthenticatedLayout.cshtml" : "/Views/Shared/_Layout.cshtml";
 }
 
-<head>
+<!--<head>
     <meta charset="utf-8" />
     <title></title>
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/mainpage.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
-</head>
+</head> -->
 
-<body>
 
+    @if(User.Identity.IsAuthenticated)
+    {
+        <a class="main-menu-item mt-4 mb-4 me-auto ms-auto d-block" asp-action="AccountInfo" asp-controller="Account">Account settings</a>
+    }
     <div class="main-text">
         <div class="front-message">
             <div class="front-message-text">
@@ -184,5 +187,5 @@
 
     <div class="line">
     </div>
-</body>
+
 

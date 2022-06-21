@@ -46,9 +46,8 @@ a {
    
 }*/
 
+
 .top-main-button {
-    /*width: 150px;
-    max-width: 150px;*/
     min-width:200px;
     height: 60px;
     max-height: 60px;
@@ -397,3 +396,10 @@ a {
     font-size: 16px;
     color: #626262;
 }
+
+.arial-bold-text {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 900;
+}
+
