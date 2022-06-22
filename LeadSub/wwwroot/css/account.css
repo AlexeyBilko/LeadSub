@@ -133,7 +133,7 @@ input {
 .blue-button {
     min-width: 200px;
     height: 50px;
-    max-height: 60px;
+    max-height: 44px;
     background: #3362DB;
     border-radius: 14px;
     display: inline-flex;
@@ -144,14 +144,17 @@ input {
     font-family: 'Arial';
     font-style: normal;
     font-weight: 900;
-    font-size: 19px;
+    font-size: 16px;
     color: #FFFFFF;
 }
 
-    .blue-button :hover {
-        font-size: 20px;
-    }
 
+    .blue-button:hover,
+    .blue-button:active {
+        background: #FFFFFF;
+        color: #3362DB !important;
+        transition: 0.65s;
+    }
 
 .account-info {
     border-radius: 20px;
@@ -160,20 +163,24 @@ input {
     font-weight: 700;
     font-size: 17px;
     padding: 40px;
+    margin: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    background: #ffffff !important;
     /*margin: 10px;*/
     /*margin-bottom: 40px;*/
 }
 
 .contact-us-textarea {
-    background-color: lightgrey;
+    background-color: #F6F6F6;
     width: 100%;
     border: none;
     max-height: 200px;
     min-height: 200px;
     outline: none;
-    padding:20px;
+    padding: 20px;
     border-radius: 20px;
     font-family: 'Arial';
     font-style: normal;
     font-size: 19px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
 }
