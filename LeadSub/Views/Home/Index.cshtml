@@ -1,39 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = User.Identity.IsAuthenticated ? "/Views/Shared/AuthenticatedLayout.cshtml" : "/Views/Shared/_Layout.cshtml";
 }
 
-<head>
+<!--<head>
     <meta charset="utf-8" />
     <title></title>
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/mainpage.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
-</head>
+</head> -->
 
-<body>
 
-    <div class="nav-bar">
-        <nav class="nav">
-            <a href="/" class="main-logo">Lead<span style="color: #3362DB">Sub</span></a>
-            <div class="main-menu-items">
-                <a href="/">How To Use</a>
-                <a href="/">Pricing</a>
-                <a href="/">About Us</a>
-            </div>
-            <div class="top-main-button">
-                @if(User.Identity.IsAuthenticated)
-                {
-                    <a href="~/Account/Register" class="main-button-text">Create Page</a>
-                }
-                else
-                {
-                    <a href="~/Account/Register" class="main-button-text">Sign Up</a>
-                }
-
-            </div>
-        </nav>
-    </div>
-
+@*    @if(User.Identity.IsAuthenticated)
+    {
+        <a class="main-menu-item mt-4 mb-4 me-auto ms-auto d-block" asp-action="AccountInfo" asp-controller="Account">Account settings</a>
+    }*@
     <div class="main-text">
         <div class="front-message">
             <div class="front-message-text">
@@ -203,46 +185,7 @@
         <div class="answer">The page will not be deleted, but all functionality will become restricted for use after 2 days of late payment. At any time you will be able to pay the bill and the page will become active again.</div>
     </div>
 
-    <div class="line">
-    </div>
-</body>
-
-<footer class="main-footer">
-    <div class="footer-logo">
-        <a href="/" class="footer-main-logo">Lead<span style="color: #3362DB">Sub</span></a>
-    </div>
-    <div class="col-xxl-4 make-center">
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="/images/instagram-logo.png"/>
-                </div>
-                <p class="ms-2 social-media-title">Instagram</p>
-            </a>
-
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="~/images/youtube-logo.png"/>
-                </div>
-                <p class="ms-2 social-media-title">YouTube</p>
-            </a>
-        
-            <a href="/" class="social-media-link d-flex justify-content-md-start">
-                <div class="social-media-image">
-                    <img src="~/images/Twitter-logo.svg.png"/>
-                </div>
-                <p class="ms-2 social-media-title">Twitter</p>
-            </a>
+    <div class="footer-line">
     </div>
 
-        <div class="footer-links">
-            <div>
-                <a href="/" class="footer-link">FAQ</a>
-            </div>
-            <div>
-                <a href="/" class="footer-link">Pricing</a>
-            </div>
-            <div>
-                <a href="/" class="footer-link">Contact Us</a>
-            </div>
-        </div>
-</footer>
+

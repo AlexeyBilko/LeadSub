@@ -8,11 +8,27 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LeadSub.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/mainpage.css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="~/css/mainpage.css" rel="stylesheet" />
+     <link href="~/css/account.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
+
     <div class="container">
+        <header>
+            <a href="/" class="logo">Lead<span style="color: #3362DB">Sub</span></a>
+            <div class="mean-toggle"></div>
+            <nav>
+                <ul>
+                    <li><a class="menuitem" href="/">MySubPages</a></li>
+                    <li><a class="menuitem" href="/">Billing</a></li>
+                    <li><a class="menuitem" href="/">Links Page</a></li>
+                    <li class="top-main-button"><a class="main-button-text" href="~/Account/AccountInfo">Create Page</a></li>
+                </ul>
+            </nav>
+            <div class="clear"></div>
+        </header>
+    
         <script
           src="https://code.jquery.com/jquery-3.4.1.js"
           integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -28,26 +44,11 @@
                     })
                   })
         </script>
-
-        <header>
-            <a href="/" class="logo">Lead<span style="color: #3362DB">Sub</span></a>
-            <div class="mean-toggle"></div>
-            <nav>
-                <ul>
-                    <li><a class="menuitem" href="/">How to Use</a></li>
-                    <li><a class="menuitem" href="/">Pricing</a></li>
-                    <li><a class="menuitem" href="/">About Us</a></li>
-                    <li class="top-main-button"><a class="main-button-text" href="~/Account/Register">Sign Up</a></li>
-                </ul>
-            </nav>
-            <div class="clear"></div>
-        </header>
-
+    
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-
-        <footer class="main-footer">
+        <footer>
             <div class="footer-logo">
                 <a href="/" class="footer-main-logo">Lead<span style="color: #3362DB">Sub</span></a>
             </div>

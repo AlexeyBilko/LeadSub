@@ -1,0 +1,45 @@
+﻿@model LeadSub.Models.ViewModels.AccountSettingsViewModel
+@{
+    Layout = "~/Views/Shared/AuthenticatedLayout.cshtml";
+}
+<div style="display:grid">
+     <div class="d-flex ms-auto me-auto mt-5">
+            <h3 class="d-block arial-bold-text mb-auto mt-auto">Hi, @Model.Name </h3>
+            <img src="https://media.istockphoto.com/vectors/emoticon-flat-design-drop-shadow-effect-vector-id1258050284?k=20&m=1258050284&s=170667a&w=0&h=5LCQUJa6Q6HvFFryDGibgOJjUqxubYcWGD_ZItmmpFk=" width=80 height=80 class="d-block ms-2 mt-auto mb-auto"/>
+     </div>
+</div>
+
+<div class="container-fluid col-xxl-7">
+    <div class="account-info bg-light">
+        <div class="d-flex mt-3 flex-wrap">
+            <p>Email: @Model.Email</p>        
+        </div>
+        <div class="d-flex mt-3 flex-wrap">
+            <p style="width:65%" class="mt-auto mb-auto">Password: ********</p>
+            <a href="#" class="blue-button">Change password</a>
+        </div>
+        <div class="d-flex mt-3 flex-wrap">
+            <p style="width:65%" class="mt-auto mb-auto">Total followers engaged via Lead<span style="color: #3362DB">Sub</span>: @Model.TotalFollowers</p>
+            <a href="#" class="blue-button">My SubPages</a>
+        </div>
+         <div class="d-flex mt-3 flex-wrap">
+            <p style="width:65%" class="mt-auto mb-auto">Billing: $0</p>
+            <a href="#" class="blue-button">Check my billing</a>
+        </div>
+    </div>
+</div>
+
+
+<h3 class="arial-bold-text text-center mt-5">Contact Us</h3>
+
+<div class="container-fluid col-xxl-7">
+
+<h5 class="arial-bold-text text-left mt-5 ms-5">Your message</h5>
+<textarea class="contact-us-textarea">
+
+</textarea>
+<input href="#" class="blue-button d-block me-auto ms-auto mt-4" style="max-width: 120px;min-width:120px; height: 50px;border:none" type="submit" value="Send"/>
+</div>
+
+    <div class="footer-line">
+    </div>

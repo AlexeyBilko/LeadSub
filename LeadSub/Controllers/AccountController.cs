@@ -36,7 +36,18 @@ namespace LeadSub.Controllers
                 ReturnUrl = returnUrl
             });
         }
-
+        public async Task<IActionResult> AccountInfo()
+        {
+            User user = await userManager.GetUserAsync(User);
+            AccountSettingsViewModel model = new AccountSettingsViewModel
+            {
+                Name = user.UserName,
+                Email = user.Email,
+                OldPassword = user.PasswordHash,
+                TotalFollowers = 0
+            };
+            return View(model);
+        }
         public IActionResult Register()
         {
             return View();
