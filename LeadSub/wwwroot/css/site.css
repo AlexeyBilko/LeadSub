@@ -41,6 +41,12 @@ header {
     text-decoration: none !important;
 }
 
+    .logo:hover {
+        color: black;
+        font-size: 37px;
+        transition: 0.3s;
+    }
+
 nav {
     float:right;
 }
@@ -60,6 +66,10 @@ nav ul {
         margin-right: 35px;
     }
 
+    .mi{
+        color: black !important;
+    }
+
         nav ul li a {
             display: block;
             margin: 10px 0;
@@ -76,10 +86,14 @@ nav ul {
 .menuitem.active,
 .menuitem:hover {
     background: #3362DB;
-    color: #fff;
+    color: #fff !important;
     transition: 0.5s;
 }
 
+.auth_menuitem {
+    margin-right: 0px !important;
+    margin-left: 10px !important;
+}
 
 
 @media (max-width: 1200px) {
