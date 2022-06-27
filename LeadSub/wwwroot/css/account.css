@@ -182,3 +182,9 @@ input {
     font-size: 19px;
     box-shadow: 0 2px 5px rgba(0,0,0,.2);
 }
+#change-password-form{
+    display:block;
+}
+.change-pswd-input{
+
+}
