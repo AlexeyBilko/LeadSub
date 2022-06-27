@@ -8,5 +8,10 @@ namespace LeadSub.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateSubPage()
+        {
+            return View();
+        }
     }
 }
