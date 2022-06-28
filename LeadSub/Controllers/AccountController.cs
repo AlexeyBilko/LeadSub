@@ -33,7 +33,7 @@ namespace LeadSub.Controllers
         {
             return View(new LoginViewModel()
             {
-                ReturnUrl = returnUrl
+               // ReturnUrl = returnUrl
             });
         }
         public async Task<IActionResult> AccountInfo()
@@ -43,7 +43,6 @@ namespace LeadSub.Controllers
             {
                 Name = user.UserName,
                 Email = user.Email,
-                OldPassword = user.PasswordHash,
                 TotalFollowers = 0
             };
             return View(model);
@@ -75,11 +74,7 @@ namespace LeadSub.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -101,25 +96,22 @@ namespace LeadSub.Controllers
 
                     Random rand = new Random();
                     int code = rand.Next(100000, 999999);
-
+                    
 
                     await EmailManager.SendText(model.Email, $"{code}");
                     return View("ConfirmEmail", new ConfirmEmailViewModel
                     {
                         UserName=model.UserName,
                         Email=model.Email,
+                        Password=model.Password,
                         Code=code.ToString()
                     });
                 }
                 else
                 {
-                    ModelState.AddModelError("Email","This email or userName is alredy taken!");
+                    ModelState.AddModelError("","This email or userName is alredy taken!");
                 }
            
-            }
-            else
-            {
-                //ModelState.AddModelError("Email", "This email or userName is alredy taken!");
             }
             return View();
         }
@@ -137,7 +129,7 @@ namespace LeadSub.Controllers
                         Email = model.Email,
                         UserName = model.UserName
                     };
-                    var result = await userManager.CreateAsync(user);
+                    var result = await userManager.CreateAsync(user,model.Password);
 
                     if (result.Succeeded)
                     {
@@ -152,6 +144,10 @@ namespace LeadSub.Controllers
                         }
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Невірний код!");
+                }
             }
                 
             return View();
@@ -162,8 +158,9 @@ namespace LeadSub.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        
 
-        public async Task<IActionResult> ChangePassword(string returnUrl)
+        /*public async Task<IActionResult> ChangePassword(string returnUrl)
         {
             User user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
             return View(new ChangePasswordViewModel()
@@ -172,21 +169,18 @@ namespace LeadSub.Controllers
                 ReturnUrl = returnUrl
             });
 
-        }
+        }*/
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePassword(AccountSettingsViewModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = await userManager.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
-                var res = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                User user = await userManager.FindByEmailAsync(model.Email);
+                var res = await userManager.ChangePasswordAsync(user, model.ConfirmationOldPassword, model.NewPassword);
                 if (res.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
+                    TempData["Message"] = "Password was success changed";
                 }
                 else
                 {
@@ -196,7 +190,7 @@ namespace LeadSub.Controllers
                     }
                 }
             }
-            return View();
+            return View("AccountInfo",model);
         }
     }
 }

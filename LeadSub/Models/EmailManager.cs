@@ -14,11 +14,11 @@ namespace LeadSub.Models
                 {
                     var client = new SmtpClient("smtp.mailtrap.io", 465)
                     {
-                        Credentials = new NetworkCredential("e9701b479f2109", "f67274ff57d21d"),
+                        Credentials = new NetworkCredential("685e99dfed287c", "c4d18d295d67de"),
                         EnableSsl = true
 
                     };
-                    client.Send("ee4b55900e-9f79ad@inbox.mailtrap.io", to, "Header", text);
+                    client.Send("a45419cde6-d79e75@inbox.mailtrap.io", to, "Header", text);
                 }
                 catch
                 {
