@@ -61,6 +61,10 @@
     margin-left: 150px;
 }
 
+.top-main-button-auth {
+    margin-left: 50px;
+}
+
 
 .main-button-text {
     font-family: 'Arial';
@@ -72,7 +76,7 @@
 
 .top-main-button:hover,
 .top-main-button:active {
-    background: #FFFFFF;
+    background: #FFFFFF !important;
     color: #3362DB !important;
     transition: 0.65s;
 }

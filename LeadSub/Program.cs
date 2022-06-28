@@ -1,8 +1,10 @@
 using BLL.Extensions;
 using DAL.Context;
 using Google.Apis.Auth.AspNetCore3;
+using LeadSub.APIConfig;
 using LeadSub.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,9 +39,31 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 
+
+
 builder.Services.AddIdentity<User, IdentityRole>()
           .AddEntityFrameworkStores<LeadSubContext>()
           .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+               .AddJwtBearer(options =>
+               {
+                   options.RequireHttpsMetadata = false;
+                   options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidIssuer = AuthOptions.ISSUER,
+                       ValidateAudience = true,
+                       ValidAudience = AuthOptions.AUDIENCE,
+                       ValidateLifetime = true,
+                       IssuerSigningKey = AuthOptions.GetSymetricKey(),
+                       ValidateIssuerSigningKey = true
+                   };
+               });
 
 builder.Services.AddSession();
 var app = builder.Build();

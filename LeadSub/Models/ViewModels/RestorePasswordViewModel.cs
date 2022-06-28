@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace LeadSub.Models.ViewModels
 {
-    public class ChangePasswordViewModel
+    public class RestorePasswordViewModel
     {
-        public string UserId { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
-        public string OldPassword { get; set; }
+        public string Email { get; set; }
+        
         [Required]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string ConfirmNewPassword { get; set; }
-        public string ReturnUrl { get; set; }
+        //public string ReturnUrl { get; set; }
     }
 }
