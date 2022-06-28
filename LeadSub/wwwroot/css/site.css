@@ -30,18 +30,18 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,.2);
 }
 
-.logo {
+.layout-logo {
     float: left;
     text-align: center;
     line-height: 60px;
     font-size: 36px;
     padding: 0 20px;
     color: black;
-    font-weight: 700;
+    font-weight: 900;
     text-decoration: none !important;
 }
 
-    .logo:hover {
+    .layout-logo:hover {
         color: black;
         font-size: 37px;
         transition: 0.3s;
@@ -70,18 +70,18 @@ nav ul {
         color: black !important;
     }
 
-        nav ul li a {
-            display: block;
-            margin: 10px 0;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #262626;
-            border-radius: 20px;
-            font-family: 'Arial';
-            font-style: normal;
-            font-weight: 900;
-            font-size: 16px;
-        }
+nav ul li a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #262626;
+    border-radius: 20px;
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+}
 
 .menuitem.active,
 .menuitem:hover {
@@ -179,6 +179,7 @@ footer {
 .footer-links {
     text-align: left !important;
     margin: auto;
+    color: #333333;
 }
 
 .footer-link {
@@ -188,18 +189,17 @@ footer {
     font-size: 18px;
     margin: auto;
     color: inherit !important;
-    color: #000000;
 }
 
 .social-media-link {
     color: inherit !important;
-    color: #000000;
+    color: #333333;
 }
 
 .social-media {
     display: grid;
     color: inherit !important;
-    color: #000000;
+    color: black !important;
     grid-template-columns: 1fr 1fr;
     text-align: right;
 }
@@ -213,7 +213,7 @@ a {
     font-style: normal;
     font-weight: 900;
     font-size: 28px;
-    color: black;
+    color: black !important;
     text-decoration: none;
 }
 
@@ -224,7 +224,7 @@ a {
     font-size: 16px;
     margin: 0px;
     color: inherit !important;
-    color: #000000;
+    color: #333333 !important;
 }
 
 .social-media-image {
