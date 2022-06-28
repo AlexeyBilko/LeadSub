@@ -17,7 +17,7 @@
     <div class="background">
         <div class="shape"></div>
     </div>
-    <form method="post" action="~/Account/Register" class="mt-5">
+    <form method="post" asp-controller="Account" asp-action="Login" class="mt-5">
         <h3>Login</h3>
 
         <label asp-validation-for="Email">Email</label>
@@ -31,5 +31,5 @@
         <a class="link" href="~/Account/Register">Register</a>
 
     </form>
-    <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
+    <div class="text-danger mt-3" asp-validation-summary="All"></div>
 </div>
