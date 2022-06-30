@@ -13,8 +13,8 @@ namespace BLL.Services
         where T1 : class
     {
      
-        IRepository<T1> repository;
-        IMapper mapper;
+        protected IRepository<T1> repository;
+        protected IMapper mapper;
         public GenericService(IRepository<T1>repository)
         {
             this.repository = repository;

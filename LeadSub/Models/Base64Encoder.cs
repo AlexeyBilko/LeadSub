@@ -11,20 +11,24 @@ namespace LeadSub.Models
     {
         public static string GetBase64String(IFormFile file)
         {
-            using (var stream = file.OpenReadStream())
+            if (file != null)
             {
-                byte[] bytes=new byte[stream.Length+32];
-                int numBytesToRead = (int)stream.Length;
-                int numBytesRead = 0;
-                while (numBytesToRead>0)
+                using (var stream = file.OpenReadStream())
                 {
-                    int n = stream.Read(bytes, numBytesRead, 32);
-                    numBytesRead += n;
-                    numBytesToRead -= n;
+                    byte[] bytes = new byte[stream.Length + 32];
+                    int numBytesToRead = (int)stream.Length;
+                    int numBytesRead = 0;
+                    while (numBytesToRead > 0)
+                    {
+                        int n = stream.Read(bytes, numBytesRead, 32);
+                        numBytesRead += n;
+                        numBytesToRead -= n;
+                    }
+                    string str = Convert.ToBase64String(bytes);
+                    return $"data:image/{Path.GetExtension(file.FileName)};base64, {str}";
                 }
-                string str=Convert.ToBase64String(bytes);
-                return $"data:image/{Path.GetExtension(file.FileName)};base64, {str}";
             }
+            else return "";
         }
     }
 }
