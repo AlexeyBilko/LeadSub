@@ -50,6 +50,7 @@ namespace LeadSub.Controllers
             });
 
         }
+        [Authorize]
         public async Task<IActionResult> AccountInfo()
         {
             User user = await userManager.GetUserAsync(User);
@@ -185,21 +186,26 @@ namespace LeadSub.Controllers
             if (ModelState.IsValid) 
             {
                 User user = await userManager.FindByEmailAsync(model.Email);
-                string resetToken=await userManager.GeneratePasswordResetTokenAsync(user);
-                var res=await userManager.ResetPasswordAsync(user, resetToken, model.NewPassword);
-                if (res.Succeeded)
-                {
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    foreach (var item in res.Errors)
+               if(!await userManager.CheckPasswordAsync(user, model.NewPassword))
+               {
+                    string resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var res = await userManager.ResetPasswordAsync(user, resetToken, model.NewPassword);
+                    if (res.Succeeded)
                     {
-                        ModelState.AddModelError("", item.Description);
+                        return RedirectToAction("Index", "Home");
                     }
-                }
-             
+                    else
+                    {
+                        foreach (var item in res.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
+                    }
+               }
+               else
+               {
+                  ModelState.AddModelError("", "Новий пароль не може співпадати зі старим!");
+               }
             }
             return View(model);
         }

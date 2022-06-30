@@ -15,6 +15,7 @@ namespace LeadSub.Models.ViewModels
         public string NewPassword { get; set; }
         [Required]
         [DataType(DataType.Password)]
+        [Compare("NewPassword")]
         public string ConfirmNewPassword { get; set; }
         //public string ReturnUrl { get; set; }
     }

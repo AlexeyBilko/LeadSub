@@ -37,7 +37,7 @@
                 <span asp-validation-for="NewPassword" class="text-danger fw-bold mt-2"></span>
                 <input asp-for="ConfirmNewPassword" class="change-pswd-input" type="password" placeholder="Confirm new password"/>
                 <span asp-validation-for="ConfirmNewPassword" class="text-danger fw-bold mt-2"></span>
-                <div class="forgot-pass"><a href="">I forgot password</a></div>
+                <div class="forgot-pass"><a asp-controller="Account" asp-action="ForgotPassword">I forgot password</a></div>
                 <input type="submit" class="blue-button d-block ms-auto me-auto mt-3" style="border:none;" value="Change"/>
             </form>
         </div>
