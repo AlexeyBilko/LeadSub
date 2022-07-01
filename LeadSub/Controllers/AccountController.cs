@@ -1,8 +1,4 @@
 ﻿using DAL.Context;
-using Google.Apis.Auth;
-using Google.Apis.Auth.AspNetCore3;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Gmail.v1;
 using LeadSub.Models;
 using LeadSub.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -16,13 +12,11 @@ namespace LeadSub.Controllers
     {
         UserManager<User> userManager;
         SignInManager<User> signInManager;
-        RoleManager<IdentityRole> roleManager;
 
         public AccountController(UserManager<User> user, SignInManager<User> signIn, RoleManager<IdentityRole> roleManager)
         {
             userManager = user;
             signInManager = signIn;
-            this.roleManager = roleManager;
         }
 
         public IActionResult AccessDenied(string ReturnUrl)
@@ -77,7 +71,7 @@ namespace LeadSub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-
+            
             if (ModelState.IsValid)
             {
                 User user = await userManager.Users.FirstOrDefaultAsync(x => x.Email == model.Email);

@@ -49,8 +49,8 @@ namespace LeadSub.Controllers
                         SuccessButtonTitle = subpage.SuccessButtonTitle,
                         SuccessDescription = subpage.SuccessDescription,
                         CreationDate = DateTime.Now,
-                        ViewsCount = "0",
-                        SubscriptionsCount = "0",
+                        ViewsCount = 0,
+                        SubscriptionsCount = 0,
                         UserId=user.Id
                     };
                     await subPagesService.AddAsync(dto);
