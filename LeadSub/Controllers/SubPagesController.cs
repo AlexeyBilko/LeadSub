@@ -51,7 +51,7 @@ namespace LeadSub.Controllers
                         CreationDate = DateTime.Now,
                         ViewsCount = "0",
                         SubscriptionsCount = "0",
-                        UserLogin = user.Email
+                        UserId=user.Id
                     };
                     await subPagesService.AddAsync(dto);
                     return RedirectToAction("MySubPages", "SubPages");

@@ -19,10 +19,10 @@ namespace BLL.DTO
         public string? MainImage { get; set; }
         public string? SuccessDescription { get; set; }
         public string? SuccessButtonTitle { get; set; }
-        public string? SubscriptionsCount { get; set; }
-        public string? ViewsCount { get; set; }
+        public int SubscriptionsCount { get; set; }
+        public int ViewsCount { get; set; }
         public DateTime CreationDate { get; set; }
-        public string? UserLogin { get; set; }
+        public string? UserId { get; set; }
 
 
        // public ICollection<BilledPagesDTO> BilledPages { get; set; }
