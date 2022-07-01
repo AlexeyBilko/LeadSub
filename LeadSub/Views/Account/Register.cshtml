@@ -7,33 +7,28 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/mainpage.css" rel="stylesheet" />
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css/account.css" rel="stylesheet" />
-    <link href="~/css/register_form.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
 </head>
 
 <body>
-
-    <div class="background">
-        <div class="shape"></div>
-    </div>
     <form method="post" action="~/Account/Register" class="mt-5">
-        <h3>Register</h3>
+        <div class="form-border">
+            <h3>Register</h3>
 
-        <label asp-validation-for="UserName">Name</label>
-        <input type="text" asp-for="UserName" placeholder="-" />
-        <label asp-validation-for="Email">Email</label>
-        <input type="email" asp-for="Email" placeholder="-" />
-        <label asp-validation-for="Password">Password</label>
-        <input type="password" asp-for="Password" placeholder="-" />
-        <label asp-validation-for="ConfirmPassword">Confirm Password</label>
-        <input type="password" asp-for="ConfirmPassword" placeholder="-" />
-        
-        <input class="button-login"type="submit" value="Log In" />
-
-        <a class="link" href="~/Account/Login">I already have an account</a>
-
+            <label asp-validation-for="UserName">Name</label>
+            <input type="text" asp-for="UserName" placeholder="Your Name" />
+            <label asp-validation-for="Email">Email</label>
+            <input type="email" asp-for="Email" placeholder="Your Email" />
+            <label asp-validation-for="Password">Password</label>
+            <input type="password" asp-for="Password" placeholder="Create password" />
+            <label asp-validation-for="ConfirmPassword">Confirm Password</label>
+            <input type="password" asp-for="ConfirmPassword" placeholder="Confirm password" />
+            
+            <input class="button-login"type="submit" value="Create new account" />
+        </div>
+        <div class="login-links"> 
+            <a class="link" href="~/Account/Login">I already have an account</a>
+            <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
+        </div>
     </form>
-    <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
 </body>

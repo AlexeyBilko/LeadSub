@@ -33,8 +33,9 @@
         <input type="hidden" asp-for="Password" />
 
         <input style="margin-top: 35px !important" class="button-login" type="submit" value="Submit" />
-
-        <a style="margin-top: 10px !important" class="link" href="~/Account/Register">Set Another Email</a>
+        @if(!Model.IsRestorePassword) {
+            <a style="margin-top: 10px !important" class="link" href="~/Account/Register">Set Another Email</a>
+        }
     </form>
     <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
    
