@@ -13,23 +13,21 @@
 </head>
 
 <div class="container-fluid col-xl-5">
-   
-    <div class="background">
-        <div class="shape"></div>
-    </div>
     <form method="post" asp-controller="Account" asp-action="Login" class="mt-5">
-        <h3>Login</h3>
+        <div class="form-border">
+            <h3>Login</h3>
 
-        <label asp-validation-for="Email">Email</label>
-        <input type="email" asp-for="Email" placeholder="-" />
-        <label asp-validation-for="Password">Password</label>
-        <input type="password" asp-for="Password" placeholder="-" />
+            <label asp-validation-for="Email">Email</label>
+            <input type="email" asp-for="Email" placeholder="Your Email" />
+            <label asp-validation-for="Password">Password</label>
+            <input type="password" asp-for="Password" placeholder="Your Password" />
 
-        <input class="button-login"type="submit" value="Log In" />
-
-        
-        <a class="link" href="~/Account/Register">Register</a>
-
+            <input class="button-login"type="submit" value="Log In" />
+        </div>
+        <div class="login-links">    
+            <div><a class="link" href="~/Account/Register">Create new account</a></div>
+            @*add*@<div><a class="link" href="~/Account/ForgotPassword">I forgot my password</a></div>
+            <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
+        </div>
     </form>
-    <div class="text-danger mt-3" asp-validation-summary="ModelOnly"></div>
 </div>

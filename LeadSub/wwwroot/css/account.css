@@ -98,13 +98,42 @@
     color: #FFFFFF;
 }
 
-
     .blue-button:hover,
     .blue-button:active {
         background: #FFFFFF;
         color: #3362DB !important;
         transition: 0.65s;
     }
+
+.red-button {
+    min-width: 200px;
+    max-width: 200px;
+    height: 50px;
+    max-height: 44px;
+    background: #ED3838;
+    border-radius: 14px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    color: white !important;
+    margin-top: 50px;
+    display: grid;
+}
+
+    .red-button:hover,
+    .red-button:active {
+        background: #FFFFFF;
+        color: #ED3838 !important;
+        transition: 0.65s;
+    }
+
+
+
 
 .account-info {
     border-radius: 20px;
@@ -164,4 +193,12 @@
     .account-info {
         padding: 20px;
     }
+}
+
+.translateAnimationClass{
+    transition: 0.65s;
+}
+
+.collapse{
+    width:100% !important;
 }

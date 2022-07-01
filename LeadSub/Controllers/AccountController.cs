@@ -29,7 +29,6 @@ namespace LeadSub.Controllers
         {
             return RedirectToAction("Login", new { returnUrl = ReturnUrl });
         }
-
         public IActionResult Login(string returnUrl)
         {
             return View();
