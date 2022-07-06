@@ -8,7 +8,6 @@ namespace LeadSub.Controllers
 {
     public class HomeController : Controller
     {
-        //LeadSubContext context;
         private SubPagesService subPagesService;
         public HomeController(SubPagesService service)
         {
@@ -21,7 +20,6 @@ namespace LeadSub.Controllers
             return View();
 
         }
-
         public IActionResult Privacy()
         {
             return View();

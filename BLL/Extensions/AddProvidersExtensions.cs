@@ -5,6 +5,7 @@ using BLL.Services;
 using BLL.DTO;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
+using BLL.Services.IdentityServices;
 
 namespace BLL.Extensions
 {
@@ -30,6 +31,7 @@ namespace BLL.Extensions
 
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = "";
             });
             services.AddIdentity<User, IdentityRole>()
                  .AddEntityFrameworkStores<LeadSubContext>()
@@ -53,7 +55,9 @@ namespace BLL.Extensions
             services.AddTransient<IService<BilledPages, BilledPagesDTO>, BilledPagesService>();
             services.AddTransient<BilledPagesService, BilledPagesService>();
             services.AddTransient<IRepository<BilledPages>, BilledPagesRepository>();
-          
+
+            services.AddScoped<UserService, UserService>();
+            services.AddScoped<SignInServcie, SignInServcie>();
 
             services.AddTransient<DbContext, LeadSubContext>();
         }

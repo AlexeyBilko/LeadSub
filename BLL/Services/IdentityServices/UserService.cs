@@ -26,22 +26,51 @@ namespace BLL.Services.IdentityServices
             });
             mapper = new Mapper(configuration);
         }
-        public async Task<IdentityResult> CreateAsync(UserDTO user)
+        public async Task<IdentityResult> CreateAsync(UserDTO user,string password)
         {
+            user.Id = Guid.NewGuid().ToString();
             User newUser = mapper.Map<UserDTO, User>(user);
-            var res=await userManager.CreateAsync(newUser);
+            newUser.UserName = user.Email;
+            var res=await userManager.CreateAsync(newUser,password);
             return res;
         }
+
         public async Task<UserDTO> GetUser(ClaimsPrincipal claims)
         {
             UserDTO user = mapper.Map<User,UserDTO>(await userManager.GetUserAsync(claims));
+            return user;
+        }
+        public async Task<UserDTO> FindByEmailAsync(string email)
+        {
+            UserDTO user = mapper.Map<User, UserDTO>(await userManager.FindByEmailAsync(email));
             return user;
         }
         public string GetUserId(ClaimsPrincipal claims)
         {
             return userManager.GetUserId(claims);
         }
-        //public Task<UserDTO>FindByEmailAsync
+        
+        public async Task<IdentityResult> ChangePasswordAsync(string Email,string newPassword,string oldPassword)
+        {
+            User user=await userManager.FindByEmailAsync(Email);
+            var res = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            return res;
+        }
+        public async Task<IdentityResult>RestorePassword(string email,string newPassword)
+        {
+            User user = await userManager.FindByEmailAsync(email);
+            PasswordHasher<User> hasher = new PasswordHasher<User>();
+            PasswordVerificationResult res = hasher.VerifyHashedPassword(user, user.PasswordHash, newPassword);
+            if (res==PasswordVerificationResult.Failed)
+            {
+                string resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                var identityRes = await userManager.ResetPasswordAsync(user, resetToken, newPassword);
+                return identityRes;
+            }
+            IdentityError error = new IdentityError();
+            error.Description = "Новий пароль не має співпадати зі старим!";
+            return IdentityResult.Failed(error);
+        }
 
     }
 }

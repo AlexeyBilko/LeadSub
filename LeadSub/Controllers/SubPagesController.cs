@@ -1,9 +1,8 @@
 ﻿using BLL.DTO;
 using BLL.Services;
-using DAL.Context;
+using BLL.Services.IdentityServices;
 using LeadSub.Models;
 using LeadSub.Models.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeadSub.Controllers
@@ -11,9 +10,9 @@ namespace LeadSub.Controllers
     public class SubPagesController : Controller
     {
         SubPagesService subPagesService;
-        UserManager<User> userManager;
+        UserService userManager;
 
-        public SubPagesController(UserManager<User> user, SubPagesService subPagesService)
+        public SubPagesController(UserService user, SubPagesService subPagesService)
         {
             this.subPagesService = subPagesService;
             userManager = user;
@@ -35,7 +34,7 @@ namespace LeadSub.Controllers
             {
                 if (subpage != null)
                 {
-                    User user = await userManager.GetUserAsync(User);
+                    string userId = userManager.GetUserId(User);
                     SubPageDTO dto = new SubPageDTO()
                     {
                         Avatar = Base64Encoder.GetBase64String(subpage.Avatar),
@@ -51,7 +50,7 @@ namespace LeadSub.Controllers
                         CreationDate = DateTime.Now,
                         ViewsCount = 0,
                         SubscriptionsCount = 0,
-                        UserId=user.Id
+                        UserId=userId
                     };
                     await subPagesService.AddAsync(dto);
                     return RedirectToAction("MySubPages", "SubPages");

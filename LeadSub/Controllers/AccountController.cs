@@ -1,22 +1,23 @@
-﻿using DAL.Context;
+﻿using BLL.DTO;
+using BLL.Services.IdentityServices;
 using LeadSub.Models;
 using LeadSub.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace LeadSub.Controllers
 {
     public class AccountController : Controller
     {
-        UserManager<User> userManager;
-        SignInManager<User> signInManager;
+        UserService userService;
+        SignInServcie signInService;
 
-        public AccountController(UserManager<User> user, SignInManager<User> signIn, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserService userService,SignInServcie signInServcie)
         {
-            userManager = user;
-            signInManager = signIn;
+            this.userService = userService;
+            this.signInService = signInServcie;
         }
 
         public IActionResult AccessDenied(string ReturnUrl)
@@ -30,7 +31,7 @@ namespace LeadSub.Controllers
         [Authorize]
         public async Task<IActionResult> ForgotPassword()
         {
-            User user = await userManager.GetUserAsync(User);
+            UserDTO user = await userService.GetUser(User);
             Random rand = new Random();
 
             int code = rand.Next(100000, 999999);
@@ -46,10 +47,10 @@ namespace LeadSub.Controllers
         [Authorize]
         public async Task<IActionResult> AccountInfo()
         {
-            User user = await userManager.GetUserAsync(User);
+            UserDTO user = await userService.GetUser(User);
             AccountSettingsViewModel model = new AccountSettingsViewModel
             {
-                Name = user.UserName,
+                Name = user.DisplayName,
                 Email = user.Email,
                 TotalFollowers = 0
             };
@@ -70,12 +71,9 @@ namespace LeadSub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            
             if (ModelState.IsValid)
             {
-                User user = await userManager.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
-                var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
-
+                var result = await signInService.SignInWithEmailAsync(model.Email, model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
@@ -95,13 +93,10 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await userManager.FindByEmailAsync(model.Email) == null&&await userManager.FindByNameAsync(model.UserName)==null)
+                if (await userService.FindByEmailAsync(model.Email) == null)
                 {
-
                     Random rand = new Random();
                     int code = rand.Next(100000, 999999);
-                    
-
                     await EmailManager.SendText(model.Email, $"{code}");
                     return View("ConfirmEmail", new ConfirmEmailViewModel
                     {
@@ -128,16 +123,15 @@ namespace LeadSub.Controllers
             {
                 if (model.ConfirmCode == model.Code) 
                 {
-                    User user = new User
+                    UserDTO user = new UserDTO
                     {
                         Email = model.Email,
-                        UserName = model.UserName
+                        DisplayName = model.UserName
                     };
-                    var result = await userManager.CreateAsync(user,model.Password);
-
+                    var result = await userService.CreateAsync(user,model.Password);
                     if (result.Succeeded)
                     {
-                        await signInManager.SignInAsync(user, false);
+                        await signInService.SignInWithEmailAsync(model.Email,model.Password);
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -154,12 +148,12 @@ namespace LeadSub.Controllers
                 }
             }
                 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await signInService.SignOut();
             return RedirectToAction("Index", "Home");
         }
         
@@ -178,27 +172,18 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid) 
             {
-                User user = await userManager.FindByEmailAsync(model.Email);
-               if(!await userManager.CheckPasswordAsync(user, model.NewPassword))
-               {
-                    string resetToken = await userManager.GeneratePasswordResetTokenAsync(user);
-                    var res = await userManager.ResetPasswordAsync(user, resetToken, model.NewPassword);
-                    if (res.Succeeded)
+                 var res = await userService.RestorePassword(model.Email, model.NewPassword);
+                 if (res.Succeeded)
+                 {
+                    return RedirectToAction("Index", "Home");
+                 }
+                 else
+                 {
+                    foreach (var item in res.Errors)
                     {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-                        foreach (var item in res.Errors)
-                        {
                             ModelState.AddModelError("", item.Description);
-                        }
                     }
-               }
-               else
-               {
-                  ModelState.AddModelError("", "Новий пароль не може співпадати зі старим!");
-               }
+                 }
             }
             return View(model);
         }
@@ -208,8 +193,7 @@ namespace LeadSub.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await userManager.FindByEmailAsync(model.Email);
-                var res = await userManager.ChangePasswordAsync(user, model.ConfirmationOldPassword, model.NewPassword);
+                var res = await userService.ChangePasswordAsync(model.Email, model.NewPassword, model.ConfirmationOldPassword);
                 if (res.Succeeded)
                 {
                     TempData["Message"] = "Password was success changed";
