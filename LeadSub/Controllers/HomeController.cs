@@ -9,6 +9,13 @@ namespace LeadSub.Controllers
     public class HomeController : Controller
     {
         private SubPagesService subPagesService;
+
+        public ActionResult ChangeLanguage(string lang)
+        {
+            new LangManager().SetLanguage(lang);
+            return RedirectToAction("Index", "Home");
+        }
+
         public HomeController(SubPagesService service)
         {
             subPagesService = service;

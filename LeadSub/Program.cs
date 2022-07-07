@@ -6,7 +6,9 @@ using LeadSub.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,17 @@ builder.Services.AddLeadSubDataTransients();
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
 builder.Services.ConfigureIdentityOptions(identityConnection);
 
-
+//builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+//builder.Services.Configure<RequestLocalizationOptions>(options => {
+//    List<CultureInfo> supportedCultures = new List<CultureInfo>
+//    {
+//        new CultureInfo("en-US"),
+//        new CultureInfo("uk-UK")
+//    };
+//    options.DefaultRequestCulture = new RequestCulture("uk-UK");
+//    options.SupportedCultures = supportedCultures;
+//    options.SupportedUICultures = supportedCultures;
+//});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -52,6 +64,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//app.UseRequestLocalization();
 
 app.UseCors(x => x
 .AllowAnyOrigin()
