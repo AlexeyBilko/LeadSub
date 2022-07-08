@@ -15,7 +15,7 @@ namespace BLL.Services
         {
         }
 
-        public IEnumerable<SubPageDTO> GetAll()
+       /* public IEnumerable<SubPageDTO> GetAll()
         {
             return repository.GetAll()
                 .Select(x => mapper.Map<SubPage, SubPageDTO>(x));
@@ -92,6 +92,6 @@ namespace BLL.Services
                 SubPageDTO bicycle = GetAll().FirstOrDefault(x => x.Id == Id);
                 return bicycle;
             });
-        }
+        }*/
     }
 }

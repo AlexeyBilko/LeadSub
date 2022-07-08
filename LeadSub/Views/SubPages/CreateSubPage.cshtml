@@ -38,8 +38,8 @@
         <div class="col-md-12">
           <div class="form h-100">
             <h3>Create your Subscription Page</h3>
-            <form class="mb-5" method="post" id="contactForm" action="~/SubPages/CreateSubPage" enctype="multipart/form-data">
-                @Html.HiddenFor(x => x.Id)
+            <form class="mb-5" method="post" id="contactForm" asp-action="CreateSubPage" asp-controller="SubPages" enctype="multipart/form-data">
+               
               <div class="row field-line">
                 <div class="col-md-6 field-line form-group mb-3">
                   <label for="" class="col-form-label">SubPage Title (for you) *</label>
@@ -92,18 +92,17 @@
                   <label for="" class="col-form-label">Avatar</label>
                   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                     <div class="file-upload">
-                      <button class="choose-img-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Avatar</button>
-
-                      <div class="image-upload-wrap">
-                        <input asp-for="Avatar" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                      <button class="choose-img-btn" onclick="$('#avatar').trigger( 'click' )">Add Avatar</button>
+                      <div class="image-upload-wrap" id="avatar-image-upload-wrap">
+                        <input asp-for="Avatar" class="file-upload-input" id="avatar" type='file' onchange="readURL(this);" accept="image/*" />
                         <div class="drag-text">
                           <h3 class="drag-text-h3">Drag and drop a file or select Add Avatar</h3>
                         </div>
                       </div>
-                      <div class="file-upload-content">
-                        <img class="file-upload-image" src="#" alt="your image" />
+                      <div class="file-upload-content" id="avatar-file-upload-content">
+                        <img class="file-upload-image" id="avatar-file-upload-image" src="#" alt="your image" />
                         <div class="image-title-wrap">
-                          <button type="button" onclick="removeUpload()" class="remove-image-btn">Delete Avatar</button>
+                          <button type="button" onclick="removeUploadAvatar()" class="remove-image-btn">Delete Avatar</button>
                         </div>
                       </div>
                     </div>
@@ -112,17 +111,17 @@
                   <label for="" class="col-form-label">Main Image</label>
                   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                     <div class="file-upload">
-                      <button class="choose-img-btn choose-img-btn-big" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Main Image</button>
-                      <div class="image-upload-wrap">
-                        <input asp-for="MainImage" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                      <button class="choose-img-btn choose-img-btn-big" type="button" onclick="$('#mainImage').trigger( 'click' )">Add Main Image</button>
+                      <div class="image-upload-wrap" id="mainImage-image-upload-wrap">
+                        <input asp-for="MainImage" class="file-upload-input" id="mainImage" type='file' onchange="readURL(this);" accept="image/*" />
                         <div class="drag-text">
                           <h3 class="drag-text-h3">Drag and drop a file or select Add Main Image</h3>
                         </div>
                       </div>
-                      <div class="file-upload-content">
-                        <img class="file-upload-image" src="#" alt="your image" />
+                      <div class="file-upload-content" id="mainImage-file-upload-content">
+                        <img class="file-upload-image" id="mainImage-file-upload-image" src="#" alt="your image" />
                         <div class="image-title-wrap">
-                          <button type="button" onclick="removeUpload()" class="remove-image-btn">Delete Avatar</button>
+                          <button type="button" onclick="removeUploadMainImage()" class="remove-image-btn">Delete Main Image</button>
                         </div>
                       </div>
                     </div>
@@ -141,7 +140,7 @@
                 <div class="col-md-12 form-group mb-3">
                   <label for="message" class="col-form-label">Successful message *</label>
                   <textarea asp-for="SuccessDescription" class="form-control" id="message" cols="30" rows="4"  placeholder="After successful subscription message"></textarea>
-                <span asp-validation-for="SuccessDescription" class="d-block mt-2 text-danger text-break"></span>
+                  <span asp-validation-for="SuccessDescription" class="d-block mt-2 text-danger text-break"></span>
                 </div>
               </div>
 
@@ -178,7 +177,7 @@
             <div id="form-message-success">
                 Your message was sent, thank you!
             </div>
-            <div asp-validation-summary="None" class="mt-5 text-danger">You should fill in all required fields</div>
+            <div asp-validation-summary="All" class="mt-5 text-danger">You should fill in all required fields</div>
 
           </div>
         </div>
@@ -187,38 +186,5 @@
 
   </div>
 
-<script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-    
-        var reader = new FileReader();
-    
-        reader.onload = function(e) {
-          $('.image-upload-wrap').hide();
-    
-          $('.file-upload-image').attr('src', e.target.result);
-          $('.file-upload-content').show();
-    
-          $('.image-title').html(input.files[0].name);
-        };
-    
-        reader.readAsDataURL(input.files[0]);
-    
-      } else {
-        removeUpload();
-      }
-    }
-    
-    function removeUpload() {
-      $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-      $('.file-upload-content').hide();
-      $('.image-upload-wrap').show();
-    }
-    $('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
-      });
-      $('.image-upload-wrap').bind('dragleave', function () {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
-</script>
+<script type="text/javascript" src="~/js/upload_images.js"></script>
   

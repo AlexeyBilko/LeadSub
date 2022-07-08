@@ -3,8 +3,7 @@
 namespace LeadSub.Models.ViewModels
 {
     public class SubPageViewModel
-    {
-        public int Id { get; set; }
+    { 
         [Required]
         public string? InstagramLink { get; set; }
         [Required]
@@ -23,9 +22,5 @@ namespace LeadSub.Models.ViewModels
         public string? SuccessDescription { get; set; }
         [Required]
         public string? SuccessButtonTitle { get; set; }
-        public string? SubscriptionsCount { get; set; }
-        public string? ViewsCount { get; set; }
-        public DateTime CreationDate { get; set; }
-        public string? UserLogin { get; set; }
     }
 }

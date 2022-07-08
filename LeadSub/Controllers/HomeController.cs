@@ -16,9 +16,7 @@ namespace LeadSub.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await subPagesService.AddAsync(new BLL.DTO.SubPageDTO());
             return View();
-
         }
         public IActionResult Privacy()
         {

@@ -17,17 +17,28 @@ namespace LeadSub.Controllers
             this.subPagesService = subPagesService;
             userManager = user;
         }
-        public IActionResult MySubPages()
+        public async Task<IActionResult> MySubPages()
         {
-            return View();
+            IEnumerable<SubPageDTO> res = await subPagesService.GetAllAsync();
+            return View(res);
         }
 
         public IActionResult CreateSubPage()
         {
             return View();
         }
-
         [HttpPost]
+        public async Task<IActionResult> DeleteSubPage(int Id)
+        {
+            SubPageDTO subPage= await subPagesService.DeleteAsync(Id);
+            if (subPage != null) 
+            {
+                TempData["Message"] = "SubPage is deleted!";
+            }
+            return RedirectToAction("MySubPages", "SubPages");
+        }
+
+            [HttpPost]
         public async Task<IActionResult> CreateSubPage(SubPageViewModel subpage)
         {
             if (ModelState.IsValid)
@@ -53,6 +64,7 @@ namespace LeadSub.Controllers
                         UserId=userId
                     };
                     await subPagesService.AddAsync(dto);
+                    TempData["Message"] = "New subscription page is created!";
                     return RedirectToAction("MySubPages", "SubPages");
                 }
             }

@@ -1,6 +1,4 @@
 using BLL.Extensions;
-using DAL.Context;
-
 using LeadSub.APIConfig;
 using LeadSub.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;

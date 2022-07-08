@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<BLL.DTO.SubPageDTO>
+@{
     Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
 }
 
@@ -16,37 +17,36 @@
 <h3 class="text-left total-text">Total billing:21</h3>
 </div>
 
-<!--<div class="mt-5 row">
-<div class="subpage-card col-xxl-8">
-<div class="container-fluid col-md-4">
-    <h3 class="text-left arial-bold-text">Page for engaging new followers</h3>
-</div>
-<div class="container-fluid col-md-2">
-    <h6>kkkk</h6>
-</div>
-</div>
-</div> -->
-
-
 <div class="container-fluid col-xxl-8 mt-5">
+    <h3 class="text-center text-success fw-bold">@TempData["Message"]</h3>
+    @if (Model?.Count() == 0)
+    {
+        <div class="row field-line">
+                <div class="col-md-12 form-group">
+                  <input type="submit" value="Create SubPage" class="create-btn">
+                  <span class="submitting"></span>
+                </div>
+        </div>
+    }
+    @foreach(var subPage in Model){
     <div class="subpage-card">
         <div>
-             <h3 class="text-left arial-bold-text" style="font-size:19px">Page for engaging new followers</h3>
+             <h3 class="text-left arial-bold-text" style="font-size:19px">@subPage.Header</h3>
              <div class="d-flex flex-wrap">
                 <div class="white-area" style="width:30%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views:</h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions:</h3>
+                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views: @subPage.ViewsCount</h3>
+                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions: @subPage.SubscriptionsCount</h3>
                 </div>
                 <div class="white-area" style="width:45%;">
                     <h3 class="text-left arial-bold-text" style="font-size:18px;">Subscription Rate:
-                        <span>kkk</span>
+                        <span>??</span>
                     </h3>
                     <h3 class="text-left arial-bold-text" style="font-size:18px;">Billing:
-                        <span>$15.08</span>
+                        <span>??</span>
                     </h3>
                 </div>
              </div>
-             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: 15.06.2022</h5>
+             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: @($"{subPage?.CreationDate.Day}.{subPage?.CreationDate.Month}.{subPage?.CreationDate.Year}")</h5>
         </div>
          <div class="center-btn-crud">
               <div class="d-flex flex-wrap">
@@ -56,45 +56,15 @@
                     <a class="crud-btn">
                       <img src="~/images/edit_subpage.png" width=43 height=43/>
                   </a>
-                   <a class="crud-btn">
+                  <form method="post" asp-action="DeleteSubPage" asp-controller="SubPages">
+                   <input name="Id" value=@subPage?.Id hidden/>
+                   <button class="crud-btn" type="submit">
                       <img src="~/images/delete_subpage.png" width=43 height=43/>
-                  </a>
+                   </button>
+                  </form>
               </div>
          </div>
     </div>
-    <div class="subpage-card">
-        <div>
-             <h3 class="text-left arial-bold-text" style="font-size:19px">Page for engaging new followers</h3>
-             <div class="d-flex flex-wrap">
-                <div class="white-area" style="width:30%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views:</h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions:</h3>
-                </div>
-                <div class="white-area" style="width:45%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Subscription Rate:
-                        <span>kkk</span>
-                    </h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Billing:
-                        <span>$15.08</span>
-                    </h3>
-                </div>
-             </div>
-             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: 15.06.2022</h5>
-        </div>
-         <div class="center-btn-crud">
-              <div class="d-flex flex-wrap">
-                  <a class="crud-btn">
-                      <img src="~/images/view_subpage.png" width=43 height=43/>
-                  </a>
-                    <a class="crud-btn">
-                      <img src="~/images/edit_subpage.png" width=43 height=43/>
-                  </a>
-                   <a class="crud-btn">
-                      <img src="~/images/delete_subpage.png" width=43 height=43/>
-                  </a>
-              </div>
-         </div>
-    </div>
-  
+    }
 </div>
   
