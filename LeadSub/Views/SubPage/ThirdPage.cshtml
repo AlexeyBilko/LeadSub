@@ -1,0 +1,26 @@
+﻿@model BLL.DTO.SubPageDTO
+@{
+    Layout = null;
+}
+<head>
+    <title>@Model.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="~/css/subpage.css"/>
+</head>
+<div class="container-fluid">
+    <div class="col-xxl-8">
+  <img src="@Model.Avatar" class="avatar-img"/>
+ <h3 class="mt-2 text-center">@Model.InstagramLink</h3>
+ <h3 class="mt-2 text-center">Instagram Name</h3>
+ <h4 class="mt-5 text-center">
+     Follow my instagram and the download link will become available
+ </h4>
+ <button class="submit-btn ms-auto me-auto d-block">Follow</button>
+ <button class="ifollowed-btn ms-auto me-auto d-block">I Followed &#10004;</button>
+ <h4 class="mt-5 text-center">
+    After following, return to this page and click the <span class="text-success">"I followed"</span>
+    button
+ </h4>
+ </div>
+</div>
+    

@@ -20,32 +20,34 @@ namespace LeadSub.Models
         {
             return AvailableLanguages[1].LanguageCultureName;
         }
-        public void SetLanguage(string lang)
+
+        //public void SetLanguage(string lang)
+        //{
+        //    try
+        //    {
+        //        if (!IsLanguageAvailable(lang)) lang = GetDefaultLanguage();
+        //        var cultureInfo = new CultureInfo(lang);
+        //        Thread.CurrentThread.CurrentUICulture = cultureInfo;
+        //        Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureInfo.Name);
+        //        HttpCookie langCookie = new HttpCookie("culture", lang);
+        //        langCookie.Expires = DateTime.Now.AddYears(1);
+        //        HttpContext.Current.Response.Cookies.Add(langCookie);
+        //    }
+        //    catch (Exception) { }
+        //}
+
+        public class Languages
         {
-            try
+            public string LanguageFullName
             {
-                /*if (!IsLanguageAvailable(lang)) lang = GetDefaultLanguage();
-                var cultureInfo = new CultureInfo(lang);
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureInfo.Name);
-                HttpCookie langCookie = new HttpCookie("culture", lang);
-                langCookie.Expires = DateTime.Now.AddYears(1);
-                HttpContext.Current.Response.Cookies.Add(langCookie);*/
+                get;
+                set;
             }
-            catch (Exception) { }
-        }
-    }
-    public class Languages
-    {
-        public string LanguageFullName
-        {
-            get;
-            set;
-        }
-        public string LanguageCultureName
-        {
-            get;
-            set;
+            public string LanguageCultureName
+            {
+                get;
+                set;
+            }
         }
     }
 }

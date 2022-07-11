@@ -1,0 +1,20 @@
+﻿@model BLL.DTO.SubPageDTO
+@{
+    Layout = null;
+}
+<head>
+    <title>@Model.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="~/css/subpage.css"/>
+</head>
+
+<div class="container-fluid col-xxl-6">
+     <img src="@Model.MainImage" class="d-block me-auto ms-auto" style="padding:2%;"/>
+  
+    <h3 class="mt-3 text-center">@Model.Header</h3>
+ <div class="description-area text-left">
+    @Model.Description
+ </div>
+ <button class="submit-btn ms-auto me-auto d-block">Button to Follow</button>
+</div>
+    
