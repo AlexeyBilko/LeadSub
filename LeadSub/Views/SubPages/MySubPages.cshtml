@@ -34,15 +34,36 @@
              <h3 class="text-left arial-bold-text" style="font-size:19px">@subPage.Header</h3>
              <div class="d-flex flex-wrap">
                 <div class="white-area" style="width:30%;">
-                    <div class="text-left arial-bold-text" style="font-size:16px;color:blue">Views: @subPage.ViewsCount</div>
-                    <div class="text-left arial-bold-text" style="font-size:16px;color:green">Subscriptions: @subPage.SubscriptionsCount</div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:#3362DB">Views: @subPage.ViewsCount</div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:#288A26;">Subscriptions: @subPage.SubscriptionsCount</div>
                 </div>
                 <div class="white-area" style="width:45%;">
                     <div class="text-left arial-bold-text" style="font-size:16px;">Subscription Rate:
-                        <span>??</span>
-                    </div>
+                            @if (subPage.ViewsCount != 0)
+                            {
+                                @if(((subPage.SubscriptionsCount/subPage.ViewsCount)*100) < 10)
+                                {
+                                    <span style="color: #C96D3A;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                }
+                                else
+                                {
+                                    @if(((subPage.SubscriptionsCount/subPage.ViewsCount)*100) < 20)
+                                    {
+                                        <span style="color: #E3C454;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                    }
+                                    else
+                                    {
+                                    <span style="color: #288A26;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <span style="color: #C96D3A;">0%</span>
+                            }
+                        </div>
                     <div class="text-left arial-bold-text" style="font-size:16px;">Billing:
-                        <span>??</span>
+                        <span>$0.0</span>
                     </div>
                 </div>
              </div>
