@@ -115,6 +115,7 @@ input {
     backdrop-filter: blur(10px);
     /*background: #3362DB;*/
     background: linear-gradient( to right, #3362DB, #224AAF );
+    transition: 0.65s;
 }
 
     .button-login:hover,

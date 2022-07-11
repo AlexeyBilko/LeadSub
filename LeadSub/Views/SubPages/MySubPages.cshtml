@@ -4,17 +4,17 @@
 }
 
 <head>
-    <link href="~/css/mainpage.css" rel="stylesheet" />
-    <link href="~/css/account.css" rel="stylesheet" />
+@*    <link href="~/css/mainpage.css" rel="stylesheet" />
+    <link href="~/css/account.css" rel="stylesheet" />*@
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css//mysubpages.css" rel="stylesheet"/>
+    <link href="~/css/mysubpages.css" rel="stylesheet"/>
 </head>
 
 
 <div class="total-info mt-5">
-<h3 class="text-left total-text">Total followers engaged</h3>
-<h3 class="text-left total-text">Total views</h3>
-<h3 class="text-left total-text">Total billing:21</h3>
+    <div class="text-left total-text">Total followers engaged</div>
+    <div class="text-left total-text">Total views</div>
+    <div class="text-left total-text">Total billing:21</div>
 </div>
 
 <div class="container-fluid col-xxl-8 mt-5">
@@ -34,35 +34,33 @@
              <h3 class="text-left arial-bold-text" style="font-size:19px">@subPage.Header</h3>
              <div class="d-flex flex-wrap">
                 <div class="white-area" style="width:30%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views: @subPage.ViewsCount</h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions: @subPage.SubscriptionsCount</h3>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:blue">Views: @subPage.ViewsCount</div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:green">Subscriptions: @subPage.SubscriptionsCount</div>
                 </div>
                 <div class="white-area" style="width:45%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Subscription Rate:
+                    <div class="text-left arial-bold-text" style="font-size:16px;">Subscription Rate:
                         <span>??</span>
-                    </h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Billing:
+                    </div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;">Billing:
                         <span>??</span>
-                    </h3>
+                    </div>
                 </div>
              </div>
              <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: @($"{subPage?.CreationDate.Day}.{subPage?.CreationDate.Month}.{subPage?.CreationDate.Year}")</h5>
         </div>
-         <div class="center-btn-crud">
-              <div class="d-flex flex-wrap">
-                  <a class="crud-btn">
-                      <img src="~/images/view_subpage.png" width=43 height=43/>
+         <div class="center-btn-crud d-flex flex-wrap">
+                  <a style="border: none; margin-left: 0px;" class="crud-btn">
+                      <img src="~/images/view_subpage.png" width=35 height=35/>
                   </a>
-                    <a class="crud-btn">
-                      <img src="~/images/edit_subpage.png" width=43 height=43/>
+                  <a style="border: none; margin-left: 0px; margin-top: 10px;" class="crud-btn">
+                      <img src="~/images/edit_subpage.png" width=35 height=35/>
                   </a>
                   <form method="post" asp-action="DeleteSubPage" asp-controller="SubPages">
                    <input name="Id" value=@subPage?.Id hidden/>
-                   <button class="crud-btn" type="submit">
-                      <img src="~/images/delete_subpage.png" width=43 height=43/>
+                   <button style="border: none; margin-left: -5px;" class="crud-btn" type="submit">
+                      <img src="~/images/remove-img.png" width=35 height=35/>
                    </button>
                   </form>
-              </div>
          </div>
     </div>
     }
