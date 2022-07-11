@@ -12,7 +12,7 @@ namespace LeadSub.Controllers
 
         public ActionResult ChangeLanguage(string lang)
         {
-            new LangManager().SetLanguage(lang);
+            //new LangManager().SetLanguage(lang);
             return RedirectToAction("Index", "Home");
         }
 
