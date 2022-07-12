@@ -59,6 +59,7 @@
     text-align: center;
     margin: auto;
     margin-left: 150px;
+    transition: 0.65s;
 }
 
 .top-main-button-auth {

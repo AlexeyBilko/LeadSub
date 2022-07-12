@@ -1,14 +1,13 @@
 ﻿@model BLL.DTO.SubPageDTO
 @{
-    Layout = null;
+    Layout = "/Views/Shared/FormLayout.cshtml";
 }
 <head>
     <title>@Model.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
      <link rel="stylesheet" href="~/css/subpage.css"/>
 </head>
-<div class="container-fluid">
-    <div class="col-xxl-8">
+<div class="container-fluid col-xxl-6">
+
   <img src="@Model.Avatar" class="avatar-img"/>
  <h3 class="mt-2 text-center">@Model.InstagramLink</h3>
  <h3 class="mt-2 text-center">Instagram Name</h3>
@@ -21,6 +20,7 @@
     After following, return to this page and click the <span class="text-success">"I followed"</span>
     button
  </h4>
- </div>
 </div>
-    
+   
+ 
+

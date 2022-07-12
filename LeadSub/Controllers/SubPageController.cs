@@ -21,5 +21,14 @@ namespace LeadSub.Controllers
         {
             return View(currentSubPage);
         }
+
+        public IActionResult Initial()
+        {
+            return View();
+        }
+        public IActionResult Success()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "/Views/Shared/FormLayout.cshtml";
+}
+<head>
+    <link href="~/css/initial.css" rel="stylesheet" />
+</head>
+
+  <div class="content make-center">
+    <div class="container">
+      <div class="row justify-content-center">                
+          <div class="top-vector">
+               <img style="width: 100%;" src="~/images/Vector 12.png"/>
+          </div>
+          <form class="mb-5" method="post" id="contactForm" name="contactForm">
+            <div class="text-block">
+                Enter your Instagram username to access
+            </div>
+            <div class="row username-input">              
+              <div class="col-2">
+                  <img  src="~/images/username.png"/>
+              </div>
+              <div class="col-10">
+                <input class="input-light form-control" type="text" name="name" id="name" placeholder="username">
+              </div> 
+            </div>
+            <div class="row">
+                <input type="submit" class="submit-btn" value="Confirm">
+              <span class="submitting"></span>
+            </div>
+          </form>
+      </div>
+    </div>
+
+  </div>
