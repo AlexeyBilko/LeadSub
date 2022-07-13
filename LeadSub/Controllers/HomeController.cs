@@ -23,6 +23,8 @@ namespace LeadSub.Controllers
 
         public async Task<IActionResult> Index()
         {
+            SubscriptionChecker sc = new SubscriptionChecker();
+                sc.GetFollowers();
             return View();
         }
         public IActionResult Privacy()
