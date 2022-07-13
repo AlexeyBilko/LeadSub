@@ -8,13 +8,14 @@ namespace LeadSub.Models
 {
     public class SubscriptionChecker
     {
-        public async void GetFollowers()
+        public async Task<bool> GetFollowers(string subscribeTo, string username)
         {
             var userSession = new UserSessionData
             {
                 UserName = "lead.sub",
                 Password = "LeadSub123"
             };
+
             var _instaApi = InstaApiBuilder.CreateBuilder()
                 .SetUser(userSession)
                 .UseLogger(new DebugLogger(InstagramApiSharp.Logger.LogLevel.Exceptions))
@@ -28,24 +29,26 @@ namespace LeadSub.Models
                 if (!logInResult.Succeeded)
                 {
                     Console.WriteLine($"Unable to login: {logInResult.Info.Message}");
-                    return;
+                    return false;
                 }
+                else Console.WriteLine($"Logged In successfully");
             }
-            var user = await _instaApi.UserProcessor.GetUserAsync("bilkkoo");
-            long id = user.Value.Pk;
-            Console.WriteLine(id);
-            var fullUserInfo = await _instaApi.UserProcessor.GetFullUserInfoAsync(id);
-            long amountFollowers = fullUserInfo.Value.UserDetail.FollowerCount;
-            Console.WriteLine(amountFollowers);
-            int pagesToLoad = Convert.ToInt32(amountFollowers / 100) + 1;
-            Console.WriteLine(pagesToLoad);
-            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync("bilkkoo", PaginationParameters.MaxPagesToLoad(pagesToLoad));
-            var list = userFollowers.Value.ToList();
-            Console.WriteLine(list.Count);
-            foreach (var item in list)
+
+            //var user = await _instaApi.UserProcessor.GetUserAsync(subscribeTo);
+            //long id = user.Value.Pk;
+            //Console.WriteLine(id);
+            //var fullUserInfo = await _instaApi.UserProcessor.GetFullUserInfoAsync(id);
+            //long amountFollowers = fullUserInfo.Value.UserDetail.FollowerCount;
+            //Console.WriteLine(amountFollowers);
+            //int pagesToLoad = Convert.ToInt32(amountFollowers / 100) + 1;
+            //Console.WriteLine(pagesToLoad);
+
+            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync(subscribeTo, PaginationParameters.MaxPagesToLoad(1));
+            foreach (var item in userFollowers.Value)
             {
-                Console.WriteLine(item.UserName);
+                if (item.UserName == username) return true;
             }
+            return false;
         }
     }
 }
