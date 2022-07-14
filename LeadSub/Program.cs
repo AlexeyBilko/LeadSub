@@ -1,21 +1,15 @@
 using BLL.Extensions;
-using DAL.Context;
-using Google.Apis.Auth.AspNetCore3;
 using LeadSub.APIConfig;
 using LeadSub.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    options.ListenAnyIP(7100, configure => configure.UseHttps()); // to listen for incoming https connection on port 7001
-//});
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 string str = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -23,27 +17,20 @@ string str = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddLeadSubDbContext(str);
 builder.Services.AddLeadSubDataTransients();
 
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 0;
-
-    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    options.User.RequireUniqueEmail = true;
-});
-
-
 string identityConnection = builder.Configuration.GetConnectionString("IdentityConnection");
+builder.Services.ConfigureIdentityOptions(identityConnection);
 
-
-
-builder.Services.AddIdentity<User, IdentityRole>()
-          .AddEntityFrameworkStores<LeadSubContext>()
-          .AddDefaultTokenProviders();
+//builder.Services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+//builder.Services.Configure<RequestLocalizationOptions>(options => {
+//    List<CultureInfo> supportedCultures = new List<CultureInfo>
+//    {
+//        new CultureInfo("en-US"),
+//        new CultureInfo("uk-UK")
+//    };
+//    options.DefaultRequestCulture = new RequestCulture("uk-UK");
+//    options.SupportedCultures = supportedCultures;
+//    options.SupportedUICultures = supportedCultures;
+//});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -75,6 +62,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//app.UseRequestLocalization();
 
 app.UseCors(x => x
 .AllowAnyOrigin()

@@ -11,7 +11,7 @@ namespace BLL.Services
         where T2 : class
     {
         Task<T2> AddAsync(T2 entity);
-        Task DeleteAsync(int id);
+        Task<T2> DeleteAsync(int id);
         Task UpdateAsync(T2 entity);
         Task<IEnumerable<T2>> GetAllAsync();
         T2 Get(int id);

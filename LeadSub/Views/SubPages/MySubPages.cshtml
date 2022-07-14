@@ -1,100 +1,111 @@
-﻿@{
+﻿@model IEnumerable<BLL.DTO.SubPageDTO>
+@{
     Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
 }
 
 <head>
-    <link href="~/css/mainpage.css" rel="stylesheet" />
-    <link href="~/css/account.css" rel="stylesheet" />
+@*    <link href="~/css/mainpage.css" rel="stylesheet" />
+    <link href="~/css/account.css" rel="stylesheet" />*@
     <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/css//mysubpages.css" rel="stylesheet"/>
+    <link href="~/css/mysubpages.css" rel="stylesheet"/>
 </head>
 
 
 <div class="total-info mt-5">
-<h3 class="text-left total-text">Total followers engaged</h3>
-<h3 class="text-left total-text">Total views</h3>
-<h3 class="text-left total-text">Total billing:21</h3>
+    <div class="text-left total-text">Total followers engaged</div>
+    <div class="text-left total-text">Total views</div>
+    <div class="text-left total-text">Total billing:21</div>
 </div>
-
-<!--<div class="mt-5 row">
-<div class="subpage-card col-xxl-8">
-<div class="container-fluid col-md-4">
-    <h3 class="text-left arial-bold-text">Page for engaging new followers</h3>
-</div>
-<div class="container-fluid col-md-2">
-    <h6>kkkk</h6>
-</div>
-</div>
-</div> -->
-
 
 <div class="container-fluid col-xxl-8 mt-5">
+    <h3 class="text-center text-success fw-bold">@TempData["Message"]</h3>
+    @if (Model?.Count() == 0)
+    {
+        <div class="row field-line">
+                <div class="col-md-12 form-group">
+                  <input type="submit" value="Create SubPage" class="create-btn">
+                  <span class="submitting"></span>
+                </div>
+        </div>
+    }
+    @foreach(var subPage in Model){
     <div class="subpage-card">
         <div>
-             <h3 class="text-left arial-bold-text" style="font-size:19px">Page for engaging new followers</h3>
+             <h3 class="text-left arial-bold-text" style="font-size:19px">@subPage.Header</h3>
              <div class="d-flex flex-wrap">
                 <div class="white-area" style="width:30%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views:</h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions:</h3>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:#3362DB">Views: @subPage.ViewsCount</div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;color:#288A26;">Subscriptions: @subPage.SubscriptionsCount</div>
                 </div>
                 <div class="white-area" style="width:45%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Subscription Rate:
-                        <span>kkk</span>
-                    </h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Billing:
-                        <span>$15.08</span>
-                    </h3>
+                    <div class="text-left arial-bold-text" style="font-size:16px;">Subscription Rate:
+                            @if (subPage.ViewsCount != 0)
+                            {
+                                @if(((subPage.SubscriptionsCount/subPage.ViewsCount)*100) < 10)
+                                {
+                                    <span style="color: #C96D3A;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                }
+                                else
+                                {
+                                    @if(((subPage.SubscriptionsCount/subPage.ViewsCount)*100) < 20)
+                                    {
+                                        <span style="color: #E3C454;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                    }
+                                    else
+                                    {
+                                    <span style="color: #288A26;">@((subPage.SubscriptionsCount/subPage.ViewsCount)*100)%</span>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <span style="color: #C96D3A;">0%</span>
+                            }
+                        </div>
+                    <div class="text-left arial-bold-text" style="font-size:16px;">Billing:
+                        <span>$0.0</span>
+                    </div>
                 </div>
              </div>
-             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: 15.06.2022</h5>
+             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: @($"{subPage?.CreationDate.Day}.{subPage?.CreationDate.Month}.{subPage?.CreationDate.Year}")</h5>
         </div>
-         <div class="center-btn-crud">
-              <div class="d-flex flex-wrap">
-                  <a class="crud-btn">
-                      <img src="~/images/view_subpage.png" width=43 height=43/>
-                  </a>
-                    <a class="crud-btn">
-                      <img src="~/images/edit_subpage.png" width=43 height=43/>
-                  </a>
-                   <a class="crud-btn">
-                      <img src="~/images/delete_subpage.png" width=43 height=43/>
-                  </a>
-              </div>
+
+        <div class="center-btn-crud d-flex flex-wrap">
+              <a style="border: none; margin-left: 0px;" class="crud-btn" onclick="window.open('@Url.Action($"FirstPage","SubPage",new {id=subPage?.Id})')">
+                  <img src="~/images/view_subpage.png" width=35 height=35/>
+
+              </a>
+              <a style="border: none; margin-left: 0px; margin-top: 10px;" class="crud-btn">
+                  <img src="~/images/edit_subpage.png" width=35 height=35/>
+              </a>
+              <button style="border: none; margin-left: -5px;" class="crud-btn" data-bs-toggle="modal" data-bs-target="#@($"modal{subPage.Id}")">
+                  <img src="~/images/remove-img.png" width=35 height=35/>
+              </button> 
+            
+
+<div class="modal fade" id="@($"modal{subPage.Id}")" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="d-flex">
+         <form method="post" asp-action="DeleteSubPage" asp-controller="SubPages">
+             <input value="@subPage.Id" type="hidden" name="Id">
+             <input type="submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal">
+          
+         </form>
+            <button class="btn btn-secondary ms-4" data-bs-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
          </div>
     </div>
-    <div class="subpage-card">
-        <div>
-             <h3 class="text-left arial-bold-text" style="font-size:19px">Page for engaging new followers</h3>
-             <div class="d-flex flex-wrap">
-                <div class="white-area" style="width:30%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:blue">Views:</h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;color:green">Subscriptions:</h3>
-                </div>
-                <div class="white-area" style="width:45%;">
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Subscription Rate:
-                        <span>kkk</span>
-                    </h3>
-                    <h3 class="text-left arial-bold-text" style="font-size:18px;">Billing:
-                        <span>$15.08</span>
-                    </h3>
-                </div>
-             </div>
-             <h5 class="mt-4 arial-bold-text" style="font-size:16px;">Created: 15.06.2022</h5>
-        </div>
-         <div class="center-btn-crud">
-              <div class="d-flex flex-wrap">
-                  <a class="crud-btn">
-                      <img src="~/images/view_subpage.png" width=43 height=43/>
-                  </a>
-                    <a class="crud-btn">
-                      <img src="~/images/edit_subpage.png" width=43 height=43/>
-                  </a>
-                   <a class="crud-btn">
-                      <img src="~/images/delete_subpage.png" width=43 height=43/>
-                  </a>
-              </div>
-         </div>
-    </div>
-  
+    }
 </div>
   

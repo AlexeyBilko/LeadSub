@@ -1,0 +1,35 @@
+﻿@model LeadSub.Models.ViewModels.SubscriptionCheckerViewModel
+@{
+    Layout = "/Views/Shared/FormLayout.cshtml";
+}
+<head>
+    <link href="~/css/success.css" rel="stylesheet" />
+</head>
+
+  <div class="content make-center">
+    <div class="container">
+      <div class="row justify-content-center">  
+          <div class="top-vector">
+               <img style="width: 100%;" src="~/images/success-ticks.png"/>
+          </div>
+          <form class="mb-5" method="post" id="contactForm" name="contactForm">
+            <div class="text-block">
+                Successful!
+            </div>
+            <div class="row username-input">              
+              <div class="col-12">
+                  <div class="success-text">You can get the material by clicking on the button below.</div>
+              </div>
+             </div>
+            <div class="row">
+                <a href="https://google.com" type="submit" class="submit-btn" value="@Model.subPageDTO.SuccessButtonTitle"/>
+              <span class="submitting"></span>
+            </div>
+          </form>
+          <div class="bottom-vector">
+               <img style="width: 100%;" src="~/images/Vector 12.png"/>
+          </div>
+      </div>
+    </div>
+
+  </div>

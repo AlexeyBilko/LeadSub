@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
+
 }
+@model LeadSub.Models.ViewModels.SubPageViewModel
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
@@ -36,26 +38,31 @@
         <div class="col-md-12">
           <div class="form h-100">
             <h3>Create your Subscription Page</h3>
-            <form class="mb-5" method="post" id="contactForm" name="contactForm">
+            <form class="mb-5" method="post" id="contactForm" asp-action="CreateSubPage" asp-controller="SubPages" enctype="multipart/form-data">
+               
               <div class="row field-line">
                 <div class="col-md-6 field-line form-group mb-3">
                   <label for="" class="col-form-label">SubPage Title (for you) *</label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="Your SubPage Title">
+                  <input asp-for="Title" type="text" class="form-control" id="name" placeholder="Your SubPage Title">
+                  <span asp-validation-for="Title" class="d-block mt-2 text-danger text-break"></span>
                 </div>
                 <div class="col-md-6 field-line form-group mb-3">
                   <label for="" class="col-form-label">SubPage Header (people will see) *</label>
-                  <input type="text" class="form-control" name="email" id="email"  placeholder="Your SubPage Header">
+                  <input asp-for="Header" type="text" class="form-control" id="email"  placeholder="Your SubPage Header">
+                <span asp-validation-for="Header" class="d-block mt-2 text-danger text-break"></span>
                 </div>
               </div>
 
               <div class="row field-line">
                 <div class="col-md-6 field-line form-group mb-3">
                   <label for="" class="col-form-label">Insagram Link *</label>
-                  <input type="text" class="form-control" name="name" id="name" placeholder="Instagram link to follow">
+                  <input asp-for="InstagramLink" type="text" class="form-control" id="name" placeholder="Instagram link to follow">
+                <span asp-validation-for="InstagramLink" class="d-block mt-2 text-danger text-break"></span>
                 </div>
                 <div class="col-md-6 field-line form-group mb-3">
                   <label for="" class="col-form-label">Material Link *</label>
-                  <input type="text" class="form-control" name="email" id="email"  placeholder="Link to Content your want to give">
+                  <input asp-for="MaterialLink" type="text" class="form-control" id="email"  placeholder="Link to Content your want to give">
+                <span asp-validation-for="MaterialLink" class="d-block mt-2 text-danger text-break"></span>
                 </div>
               </div>
 
@@ -64,8 +71,8 @@
                   <label for="budget" class="col-form-label">Button To Follow Title *</label>
                   <div class="row">
                       <div class="form-group mb-3">
-                      <select class="custom-select" id="budget" name="budget">
-                        <option selected>Choose...</option>
+                      <select asp-for="GetButtonTitle" class="custom-select" >
+                        <option value="">Choose...</option>
                         <option value="Get">Get</option>
                         <option value="GetMaterial">Get Material</option>
                         <option value="Subscribe">Subscribe</option>
@@ -73,7 +80,8 @@
                         <option value="Follow">Follow</option>
                         <option value="FollowToGet">Follow to Get</option>
                       </select>
-                      </div>
+                      <span asp-validation-for="GetButtonTitle" class="d-block mt-2 text-danger text-break"></span>
+                </div>
                   </div>
                 </div>
               </div>
@@ -84,18 +92,17 @@
                   <label for="" class="col-form-label">Avatar</label>
                   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                     <div class="file-upload">
-                      <button class="choose-img-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Avatar</button>
-
-                      <div class="image-upload-wrap">
-                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                      <button class="choose-img-btn" onclick="$('#avatar').trigger( 'click' )">Add Avatar</button>
+                      <div class="image-upload-wrap" id="avatar-image-upload-wrap">
+                        <input asp-for="Avatar" class="file-upload-input" id="avatar" type='file' onchange="readURL(this);" accept="image/*" />
                         <div class="drag-text">
                           <h3 class="drag-text-h3">Drag and drop a file or select Add Avatar</h3>
                         </div>
                       </div>
-                      <div class="file-upload-content">
-                        <img class="file-upload-image" src="#" alt="your image" />
+                      <div class="file-upload-content" id="avatar-file-upload-content">
+                        <img class="file-upload-image" id="avatar-file-upload-image" src="#" alt="your image" />
                         <div class="image-title-wrap">
-                          <button type="button" onclick="removeUpload()" class="remove-image-btn">Delete Avatar</button>
+                          <button type="button" onclick="removeUploadAvatar()" class="remove-image-btn">Delete Avatar</button>
                         </div>
                       </div>
                     </div>
@@ -104,17 +111,17 @@
                   <label for="" class="col-form-label">Main Image</label>
                   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                     <div class="file-upload">
-                      <button class="choose-img-btn choose-img-btn-big" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Main Image</button>
-                      <div class="image-upload-wrap">
-                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                      <button class="choose-img-btn choose-img-btn-big" type="button" onclick="$('#mainImage').trigger( 'click' )">Add Main Image</button>
+                      <div class="image-upload-wrap" id="mainImage-image-upload-wrap">
+                        <input asp-for="MainImage" class="file-upload-input" id="mainImage" type='file' onchange="readURL(this);" accept="image/*" />
                         <div class="drag-text">
                           <h3 class="drag-text-h3">Drag and drop a file or select Add Main Image</h3>
                         </div>
                       </div>
-                      <div class="file-upload-content">
-                        <img class="file-upload-image" src="#" alt="your image" />
+                      <div class="file-upload-content" id="mainImage-file-upload-content">
+                        <img class="file-upload-image" id="mainImage-file-upload-image" src="#" alt="your image" />
                         <div class="image-title-wrap">
-                          <button type="button" onclick="removeUpload()" class="remove-image-btn">Delete Avatar</button>
+                          <button type="button" onclick="removeUploadMainImage()" class="remove-image-btn">Delete Main Image</button>
                         </div>
                       </div>
                     </div>
@@ -124,14 +131,16 @@
               <div class="row field-line">
                 <div class="col-md-12 form-group mb-3">
                   <label for="message" class="col-form-label">Description *</label>
-                  <textarea class="form-control" name="message" id="message" cols="30" rows="4"  placeholder="SubPage description"></textarea>
+                  <textarea asp-for="Description" class="form-control" id="message" cols="30" rows="4"  placeholder="SubPage description"></textarea>
+                <span asp-validation-for="Description" class="d-block mt-2 text-danger text-break"></span>
                 </div>
               </div>
 
               <div class="row field-line">
                 <div class="col-md-12 form-group mb-3">
                   <label for="message" class="col-form-label">Successful message *</label>
-                  <textarea class="form-control" name="message" id="message" cols="30" rows="4"  placeholder="After successful subscription message"></textarea>
+                  <textarea asp-for="SuccessDescription" class="form-control" id="message" cols="30" rows="4"  placeholder="After successful subscription message"></textarea>
+                  <span asp-validation-for="SuccessDescription" class="d-block mt-2 text-danger text-break"></span>
                 </div>
               </div>
 
@@ -140,15 +149,16 @@
                   <label for="budget" class="col-form-label">Get Material Button Title (after subscription) *</label>
                   <div class="row">
                   <div class="form-group mb-3">
-                  <select class="custom-select" id="successbutton" name="successbutton">
-                    <option selected>Choose...</option>
+                  <select asp-for="SuccessButtonTitle" class="custom-select" id="successbutton">
+                    <option value="" >Choose...</option>
                     <option value="Subscribe">Already Followed</option>
                     <option value="SubscribeToGet">I've followed</option>
                     <option value="Follow">Get</option>
                     <option value="FollowToGet">Get My Material</option>
                     <option value="Get">Receive Material</option>
                   </select>
-                  </div>
+                  <span asp-validation-for="SuccessButtonTitle" class="d-block mt-2 text-danger text-break"></span>
+                </div>
                   </div>
                 </div>
               </div>
@@ -167,6 +177,7 @@
             <div id="form-message-success">
                 Your message was sent, thank you!
             </div>
+            <div asp-validation-summary="All" class="mt-5 text-danger">You should fill in all required fields</div>
 
           </div>
         </div>
@@ -175,38 +186,5 @@
 
   </div>
 
-<script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-    
-        var reader = new FileReader();
-    
-        reader.onload = function(e) {
-          $('.image-upload-wrap').hide();
-    
-          $('.file-upload-image').attr('src', e.target.result);
-          $('.file-upload-content').show();
-    
-          $('.image-title').html(input.files[0].name);
-        };
-    
-        reader.readAsDataURL(input.files[0]);
-    
-      } else {
-        removeUpload();
-      }
-    }
-    
-    function removeUpload() {
-      $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-      $('.file-upload-content').hide();
-      $('.image-upload-wrap').show();
-    }
-    $('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
-      });
-      $('.image-upload-wrap').bind('dragleave', function () {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
-</script>
+<script type="text/javascript" src="~/js/upload_images.js"></script>
   

@@ -4,7 +4,6 @@ namespace LeadSub.Models.ViewModels
 {
     public class AccountSettingsViewModel
     {
-       
         public string Name { get; set; }
         public string Email { get; set; }
        

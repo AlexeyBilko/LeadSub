@@ -8,8 +8,14 @@ namespace LeadSub.Controllers
 {
     public class HomeController : Controller
     {
-        //LeadSubContext context;
         private SubPagesService subPagesService;
+
+        public ActionResult ChangeLanguage(string lang)
+        {
+            //new LangManager().SetLanguage(lang);
+            return RedirectToAction("Index", "Home");
+        }
+
         public HomeController(SubPagesService service)
         {
             subPagesService = service;
@@ -17,11 +23,8 @@ namespace LeadSub.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await subPagesService.AddAsync(new BLL.DTO.SubPageDTO());
             return View();
-
         }
-
         public IActionResult Privacy()
         {
             return View();

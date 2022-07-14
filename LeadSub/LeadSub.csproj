@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,16 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EASendMail" Version="7.9.0.1" />
-    <PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
-    <PackageReference Include="Google.Apis.Auth.AspNetCore3" Version="1.57.0" />
-    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.57.0.2650" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\InstaApiSharp\InstaApiSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resourses\Resource.Eng.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resourses\Resource.Ukr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

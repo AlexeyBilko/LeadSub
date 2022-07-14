@@ -13,8 +13,8 @@ namespace BLL.Services
         where T1 : class
     {
      
-        IRepository<T1> repository;
-        IMapper mapper;
+        protected IRepository<T1> repository;
+        protected IMapper mapper;
         public GenericService(IRepository<T1>repository)
         {
             this.repository = repository;
@@ -36,7 +36,7 @@ namespace BLL.Services
             });
         }
 
-        public Task DeleteAsync(int id)
+        public Task<T2> DeleteAsync(int id)
         {
             return Task.Run(() =>
             {
@@ -46,6 +46,7 @@ namespace BLL.Services
                     repository.Delete(entity);
                     repository.SaveChanges();
                 }
+                return mapper.Map<T1, T2>(entity);
             });
         }
 

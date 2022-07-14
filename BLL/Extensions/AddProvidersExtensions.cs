@@ -5,6 +5,7 @@ using BLL.Services;
 using BLL.DTO;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Identity;
+using BLL.Services.IdentityServices;
 
 namespace BLL.Extensions
 {
@@ -16,13 +17,27 @@ namespace BLL.Extensions
             {
                 options.UseSqlServer(connectionStr);
             });
-
-            services.AddIdentityCore<User>().AddEntityFrameworkStores<LeadSubContext>()
-                .AddEntityFrameworkStores<LeadSubContext>();
-
-        
-
         }
+        public static void ConfigureIdentityOptions(this IServiceCollection services,string connectionStr)
+        {
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = "";
+            });
+            services.AddIdentity<User, IdentityRole>()
+                 .AddEntityFrameworkStores<LeadSubContext>()
+                 .AddDefaultTokenProviders();
+        }
+
         public static void AddLeadSubDataTransients(this IServiceCollection services)
         {
             services.AddTransient<IService<SubPage,SubPageDTO>, SubPagesService>();
@@ -40,7 +55,9 @@ namespace BLL.Extensions
             services.AddTransient<IService<BilledPages, BilledPagesDTO>, BilledPagesService>();
             services.AddTransient<BilledPagesService, BilledPagesService>();
             services.AddTransient<IRepository<BilledPages>, BilledPagesRepository>();
-          
+
+            services.AddScoped<UserService, UserService>();
+            services.AddScoped<SignInServcie, SignInServcie>();
 
             services.AddTransient<DbContext, LeadSubContext>();
         }

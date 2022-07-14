@@ -9,5 +9,6 @@ namespace DAL.Context
 {
     public class User:IdentityUser
     {
+        public string DisplayName { get; set; }
     }
 }
