@@ -34,20 +34,28 @@ namespace LeadSub.Models
                 else Console.WriteLine($"Logged In successfully");
             }
 
-            //var user = await _instaApi.UserProcessor.GetUserAsync(subscribeTo);
-            //long id = user.Value.Pk;
-            //Console.WriteLine(id);
-            //var fullUserInfo = await _instaApi.UserProcessor.GetFullUserInfoAsync(id);
-            //long amountFollowers = fullUserInfo.Value.UserDetail.FollowerCount;
-            //Console.WriteLine(amountFollowers);
-            //int pagesToLoad = Convert.ToInt32(amountFollowers / 100) + 1;
-            //Console.WriteLine(pagesToLoad);
-
-            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync("alexey_bilko", PaginationParameters.MaxPagesToLoad(2));
+            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync("alexey_bilko", PaginationParameters.MaxPagesToLoad(1));
             if (userFollowers.Value == null) Console.WriteLine("Error");
             foreach (var item in userFollowers.Value)
             {
-                Console.WriteLine("User");
+                Console.WriteLine(item);
+                if (item.UserName == username) return true;
+            }
+
+
+            var user = await _instaApi.UserProcessor.GetUserAsync(subscribeTo);
+            long id = user.Value.Pk;
+            Console.WriteLine(id);
+            var fullUserInfo = await _instaApi.UserProcessor.GetFullUserInfoAsync(id);
+            long amountFollowers = fullUserInfo.Value.UserDetail.FollowerCount;
+            Console.WriteLine(amountFollowers);
+            int pagesToLoad = Convert.ToInt32(amountFollowers / 100) + 1;
+            Console.WriteLine(pagesToLoad);
+            userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync("alexey_bilko", PaginationParameters.MaxPagesToLoad(1));
+            if (userFollowers.Value == null) Console.WriteLine("Error");
+            foreach (var item in userFollowers.Value)
+            {
+                Console.WriteLine(item);
                 if (item.UserName == username) return true;
             }
             return false;

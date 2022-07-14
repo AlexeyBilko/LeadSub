@@ -12,7 +12,8 @@
           <div class="top-vector">
                <img style="width: 100%;" src="~/images/Vector 12.png"/>
           </div>
-          <form class="mb-5" method="post" asp-controller="SubPage" asp-action="GetUsername"  id="usernameForm" name="contactForm">
+
+          <form class="mb-5" method="post" asp-controller="SubPage" asp-action="InitialGetUsername"  id="usernameForm" name="contactForm">
             <div class="text-block">
                 Enter your Instagram username to access
             </div>
@@ -21,8 +22,25 @@
                   <img  src="~/images/username.png"/>
               </div>
               <div class="col-10">
-                <input  type="text" asp-for="Username"  class="input-light form-control" type="text" name="name" id="name" placeholder="username">
-              </div> 
+                <input type="text" asp-for="Username"  class="input-light form-control" type="text" name="Username" id="name" placeholder="username">
+              </div>
+              <div style="display: none">
+                <input style="visibility:hidden" asp-for="subPageDTO.Id"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.InstagramLink"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.MaterialLink"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Title"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Avatar"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Header"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Description"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.GetButtonTitle"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.MainImage"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SuccessDescription"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SuccessButtonTitle"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SubscriptionsCount"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.ViewsCount"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.CreationDate"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.UserId"/>
+              </div>
             </div>
             <div class="row">
                 <input type="submit" class="submit-btn" value="Confirm">

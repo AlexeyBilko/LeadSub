@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BLL.DTO;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeadSub.Models.ViewModels
 {
@@ -6,5 +7,6 @@ namespace LeadSub.Models.ViewModels
     {
         [Required]
         public string? Username { get; set; }
+        public SubPageDTO subPageDTO { get; set; } 
     }
 }

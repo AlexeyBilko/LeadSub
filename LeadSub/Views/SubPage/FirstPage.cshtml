@@ -15,6 +15,9 @@
  <div class="description-area text-left">
     @Model.Description
  </div>
- <button class="submit-btn ms-auto me-auto d-block">Button to Follow</button>
+ <form asp-action="Initial" asp-controller="SubPage" method="get">
+     <input name="id" asp-for="@Model.Id" type="hidden"/>
+     <button class="submit-btn ms-auto me-auto d-block" type="submit">Button to Follow</button>
+ </form>
 </div>
     

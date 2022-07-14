@@ -1,21 +1,43 @@
-﻿@model BLL.DTO.SubPageDTO
+﻿@model LeadSub.Models.ViewModels.SubscriptionCheckerViewModel
 @{
     Layout = "/Views/Shared/FormLayout.cshtml";
 }
 <head>
-    <title>@Model.Title</title>
+    <title>@Model.subPageDTO.Title</title>
      <link rel="stylesheet" href="~/css/subpage.css"/>
 </head>
 <div class="container-fluid col-xxl-6">
 
-  <img src="@Model.Avatar" class="avatar-img"/>
- <h3 class="mt-2 text-center">@Model.InstagramLink</h3>
+  <img src="@Model.subPageDTO.Avatar" class="avatar-img"/>
+ <h3 class="mt-2 text-center">@Model.subPageDTO.InstagramLink</h3>
  <h3 class="mt-2 text-center">Instagram Name</h3>
  <h4 class="mt-5 text-center">
      Follow my instagram and the download link will become available
  </h4>
- <button class="submit-btn ms-auto me-auto d-block">Follow</button>
- <button class="ifollowed-btn ms-auto me-auto d-block">I Followed &#10004;</button>
+ <button  class="submit-btn ms-auto me-auto d-block">Follow</button>
+ <form method="post" asp-controller="SubPage" asp-action="CkeckSubscription">
+    <div style="display: none">
+        <input style="visibility:hidden" asp-for="Username"/>
+    </div>
+              <div style="display: none">
+                <input style="visibility:hidden" asp-for="subPageDTO.Id"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.InstagramLink"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.MaterialLink"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Title"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Avatar"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Header"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.Description"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.GetButtonTitle"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.MainImage"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SuccessDescription"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SuccessButtonTitle"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.SubscriptionsCount"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.ViewsCount"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.CreationDate"/>
+                <input style="visibility:hidden" asp-for="subPageDTO.UserId"/>
+              </div>
+    <input type="submit" class="ifollowed-btn ms-auto me-auto d-block"  value="I Followed &#10004;"/>
+ </form>
  <h4 class="mt-5 text-center">
     After following, return to this page and click the <span class="text-success">"I followed"</span>
     button
