@@ -1,5 +1,6 @@
 ﻿using BLL.DTO;
 using BLL.Services;
+using LeadSub.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeadSub.Controllers
@@ -17,7 +18,7 @@ namespace LeadSub.Controllers
             currentSubPage=await subPagesService.GetAsync(id);
             return View("ThirdPage",currentSubPage);
         }
-        public async Task<IActionResult> ThirdPage()
+        public async Task<IActionResult> Check()
         {
             return View(currentSubPage);
         }
@@ -29,6 +30,15 @@ namespace LeadSub.Controllers
         public IActionResult Success()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetUsername(SubscriptionCheckerViewModel model)
+        {
+            return View("Check", new SubscriptionCheckerViewModel()
+            {
+                Username = model.Username
+            });
         }
     }
 }
