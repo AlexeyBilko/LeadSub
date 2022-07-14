@@ -78,12 +78,32 @@
               <a style="border: none; margin-left: 0px; margin-top: 10px;" class="crud-btn">
                   <img src="~/images/edit_subpage.png" width=35 height=35/>
               </a>
-              <form method="post" asp-action="DeleteSubPage" asp-controller="SubPages">
-               <input name="Id" value=@subPage?.Id hidden/>
-               <button style="border: none; margin-left: -5px;" class="crud-btn" type="submit">
+              <button style="border: none; margin-left: -5px;" class="crud-btn" data-bs-toggle="modal" data-bs-target="#@($"modal{subPage.Id}")">
                   <img src="~/images/remove-img.png" width=35 height=35/>
-               </button>
-              </form>
+              </button> 
+            
+
+<div class="modal fade" id="@($"modal{subPage.Id}")" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="d-flex">
+         <form method="post" asp-action="DeleteSubPage" asp-controller="SubPages">
+             <input value="@subPage.Id" type="hidden" name="Id">
+             <input type="submit" value="Delete" class="btn btn-danger" data-bs-dismiss="modal">
+          
+         </form>
+            <button class="btn btn-secondary ms-4" data-bs-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
          </div>
     </div>
     }
