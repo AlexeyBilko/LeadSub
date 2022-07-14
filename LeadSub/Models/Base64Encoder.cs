@@ -30,5 +30,19 @@ namespace LeadSub.Models
             }
             else return "";
         }
+        public static IFormFile GetIFormFile(string base64string)
+        {
+            if (base64string.Contains(";base64, "))
+            {
+                string removedStr = ";base64, ";
+                int index = base64string.IndexOf(";base64, ");
+                base64string = base64string.Remove(0, (index + removedStr.Length));
+            }
+            byte[] bytes = Convert.FromBase64String(base64string);
+            MemoryStream stream = new MemoryStream(bytes);
+
+            IFormFile file = new FormFile(stream, 0, bytes.Length, "name", "name.jpeg");
+            return file;
+        }
     }
 }

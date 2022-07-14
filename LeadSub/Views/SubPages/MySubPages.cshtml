@@ -17,16 +17,11 @@
     <div class="text-left total-text">Total billing:21</div>
 </div>
 
-<div class="container-fluid col-xxl-8 mt-5">
+<div class="container-fluid col-xxl-8 mt-5" style="min-height:800px;">
     <h3 class="text-center text-success fw-bold">@TempData["Message"]</h3>
     @if (Model?.Count() == 0)
     {
-        <div class="row field-line">
-                <div class="col-md-12 form-group">
-                  <input type="submit" value="Create SubPage" class="create-btn">
-                  <span class="submitting"></span>
-                </div>
-        </div>
+        <div class="text-center arial-bold-text" style="margin-top:20%;font-size:30px!important">You do not have subscription pages</div>
     }
     @foreach(var subPage in Model){
     <div class="subpage-card">
@@ -75,7 +70,7 @@
                   <img src="~/images/view_subpage.png" width=35 height=35/>
 
               </a>
-              <a style="border: none; margin-left: 0px; margin-top: 10px;" class="crud-btn">
+               <a style="border: none; margin-left: 0px; margin-top: 10px;" class="crud-btn" href="~/SubPages/CreateSubPage/@subPage?.Id">
                   <img src="~/images/edit_subpage.png" width=35 height=35/>
               </a>
               <button style="border: none; margin-left: -5px;" class="crud-btn" data-bs-toggle="modal" data-bs-target="#@($"modal{subPage.Id}")">

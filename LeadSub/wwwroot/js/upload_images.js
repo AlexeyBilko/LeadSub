@@ -1,12 +1,29 @@
-﻿let avatar=document.getElementById('uploadAvatar')
-let mainImage = document.getElementById('uploadMainImage')
-avatar.onchange = readURL;
-mainImage.onchange = readURL;
+﻿
+//let avatar = document.getElementById('uploadAvatar')
+//let mainImage = document.getElementById('uploadMainImage')
+
+//avatar.onchange = readURL;
+//mainImage.onchange = readURL;
+
+function loadImage(img) {
+    console.log(img)
+}
+document.addEventListener('DOMContentLoaded', function () {
+    if ($('#avatar-file-upload-image')[0].src != "") {
+        $(`#avatar-image-upload-wrap`).hide();
+        $(`#avatar-file-upload-content`).show();
+    }
+    if ($('#mainImage-file-upload-image')[0].src != "") {
+        $(`#mainImage-image-upload-wrap`).hide();
+        $(`#mainImage-file-upload-content`).show();
+    }
+})
+
 
 function readURL(input) {
     if (input.files && input.files[0]) {
 
-        console.log(input)
+        console.log(input.files)
         var reader = new FileReader();
         reader.onload = function (e) {
             $(`#${input.id}-image-upload-wrap`).hide();
@@ -32,8 +49,6 @@ function removeUploadMainImage() {
     $('#mainImage-file-upload-content').hide();
     $('#mainImage-image-upload-wrap').show();
 }
-
-
 
 $('.image-upload-wrap').bind('dragover', function () {
     $('.image-upload-wrap').addClass('image-dropping');
