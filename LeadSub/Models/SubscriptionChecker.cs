@@ -43,9 +43,11 @@ namespace LeadSub.Models
             //int pagesToLoad = Convert.ToInt32(amountFollowers / 100) + 1;
             //Console.WriteLine(pagesToLoad);
 
-            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync(subscribeTo, PaginationParameters.MaxPagesToLoad(1));
+            var userFollowers = await _instaApi.UserProcessor.GetUserFollowersAsync("alexey_bilko", PaginationParameters.MaxPagesToLoad(2));
+            if (userFollowers.Value == null) Console.WriteLine("Error");
             foreach (var item in userFollowers.Value)
             {
+                Console.WriteLine("User");
                 if (item.UserName == username) return true;
             }
             return false;
