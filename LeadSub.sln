@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{750E3BC4-5BC9-4F40-A2C7-3FE0E3C3C029}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstaApiSharp", "InstaApiSharp\InstaApiSharp.csproj", "{51BCE06B-665B-4FC3-B1D3-F7AD101E242B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{750E3BC4-5BC9-4F40-A2C7-3FE0E3C3C029}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{750E3BC4-5BC9-4F40-A2C7-3FE0E3C3C029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{750E3BC4-5BC9-4F40-A2C7-3FE0E3C3C029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BCE06B-665B-4FC3-B1D3-F7AD101E242B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BCE06B-665B-4FC3-B1D3-F7AD101E242B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BCE06B-665B-4FC3-B1D3-F7AD101E242B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BCE06B-665B-4FC3-B1D3-F7AD101E242B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
