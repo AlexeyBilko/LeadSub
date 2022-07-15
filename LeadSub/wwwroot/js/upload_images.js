@@ -40,11 +40,19 @@ function readURL(input) {
 }
 
 function removeUploadAvatar() {
+    let avatarbase64 = document.getElementById('avatarbase64')
+    if (avatarbase64 != null) {
+        avatarbase64.value = null
+    }
     $('#avatar-file-upload-input').replaceWith($('.file-upload-input').clone());
     $('#avatar-file-upload-content').hide();
     $('#avatar-image-upload-wrap').show();
 }
 function removeUploadMainImage() {
+    let mainImagebase64 = document.getElementById('mainimagebase64')
+    if (mainImagebase64 != null) {
+        mainImagebase64.value = null
+    }
     $('#mainImage-file-upload-input').replaceWith($('.file-upload-input').clone());
     $('#mainImage-file-upload-content').hide();
     $('#mainImage-image-upload-wrap').show();

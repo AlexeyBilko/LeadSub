@@ -98,7 +98,7 @@
                   <label for="" class="col-form-label">Avatar</label>
                   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                     <div class="file-upload">
-                      <button class="choose-img-btn" onclick="$('#avatar').trigger( 'click' )">Add Avatar</button>
+                      <button class="choose-img-btn" type="button" onclick="$('#avatar').trigger( 'click' )">Add Avatar</button>
                       <div class="image-upload-wrap" id="avatar-image-upload-wrap">
                         <input asp-for="Avatar" class="file-upload-input" id="avatar" type='file' onchange="readURL(this);" accept="image/*" />
                         <div class="drag-text">
@@ -109,7 +109,7 @@
                                         @if (Model?.AvatarBase64 != null)
                                         {
                                             <img class="file-upload-image" id="avatar-file-upload-image" alt="your image" src="@Model.AvatarBase64"/>
-                                            <input asp-for="AvatarBase64" type="hidden"/>
+                                            <input name="AvatarBase64" value="@Model.AvatarBase64" id="avatarbase64" type="hidden"/>
                                         }
                                         else {<img class="file-upload-image" id="avatar-file-upload-image" alt="your image"/>}
                        <div class="image-title-wrap">
@@ -136,7 +136,7 @@
                                         @if (Model?.MainImageBase64 != null)
                                         {
                                             <img class="file-upload-image" id="mainImage-file-upload-image" alt="your image" src="@Model.MainImageBase64"/>
-                                             <input asp-for="MainImageBase64" type="hidden"/>
+                                            <input name="MainImageBase64" value="@Model.MainImageBase64" id="mainimagebase64" type="hidden"/>
                                         }
                                         else { <img class="file-upload-image" id="mainImage-file-upload-image" alt="your image"/>}
                                         <div class="image-title-wrap">
