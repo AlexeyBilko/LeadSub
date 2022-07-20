@@ -9,12 +9,12 @@
 <div class="container-fluid col-xxl-6">
 
   <img src="@Model.subPageDTO.Avatar" class="avatar-img"/>
- <h3 class="mt-2 text-center">@Model.subPageDTO.InstagramLink</h3>
+ <h5 class="mt-2 text-center">@Model.subPageDTO.InstagramLink</h5>
  <h3 class="mt-2 text-center">Instagram Name</h3>
- <h4 class="mt-5 text-center">
+ <h4 class="mt-5 text-center" style="font-size: 28px;">
      Follow my instagram and the download link will become available
  </h4>
- <button  class="submit-btn ms-auto me-auto d-block">Follow</button>
+ <button class="submit-btn ms-auto me-auto d-block" style="margin-bottom: 0px !important; width: 65% !important;">Follow</button>
  <form method="post" asp-controller="SubPage" asp-action="CkeckSubscription">
     <div style="display: none">
         <input style="visibility:hidden" asp-for="Username"/>
@@ -39,8 +39,8 @@
     <input type="submit" class="ifollowed-btn ms-auto me-auto d-block"  value="I Followed &#10004;"/>
  </form>
  <h4 class="mt-5 text-center">
-    After following, return to this page and click the <span class="text-success">"I followed"</span>
-    button
+    &#33; After following, return to this page and click the <span class="text-success">"I followed"</span>
+    button to Get Your Bonus
  </h4>
 </div>
    

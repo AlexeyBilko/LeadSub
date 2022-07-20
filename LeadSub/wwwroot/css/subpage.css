@@ -1,7 +1,6 @@
 ﻿.submit-btn {
     text-align: center;
-    width: 40%;
-    height: 7%;
+    width: 50%;
     padding: 10px;
     background: linear-gradient(180deg, #507EF3 0%, #0039CA 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -15,16 +14,50 @@
     transition: 0.65s;
 }
 
-    .submit-btn:hover,
-    .submit-btn:active {
-        border-radius: 34px;
-        transition: 0.65s;
+.main-image-fp{
+    margin-top: 18px;
+    max-width: 90%;
+    max-height: 400px;
+    width: fit-content;
+    display: block;
+}
+
+@media (min-width: 800px) {
+    .main-image-fp {
+        max-width: 60% !important;
+        margin-top: -20px;
     }
 
-.ifollowed-btn {
-    height: 7%;
+    .header-center {
+        font-size: 30px;
+        margin-top: 40px;
+    }
+
+    .description-area{
+        font-size: 20px;
+    }
+}
+
+.header-center {
     text-align: center;
-    width: 40%;
+    margin: auto;
+    font-size: 24px;
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 36px;
+    max-width: 600px;
+}
+
+.submit-btn:hover,
+.submit-btn:active {
+    border-radius: 34px;
+    transition: 0.65s;
+}
+
+.ifollowed-btn {
+    text-align: center;
+    width: 65%;
     padding: 10px;
     background: linear-gradient(180deg, #55DD6B 0%, #359713 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -33,7 +66,7 @@
     color: white;
     font-size: 24px;
     margin: auto;
-    margin-top: 60px;
+    margin-top: 24px;
     margin-bottom: 40px;
     transition: 0.65s;
 }
@@ -43,23 +76,26 @@
         transition: 0.65s;
     }
 
-.description-area 
-{
+.description-area {
+    max-width: 600px;
+    text-align: center !important;
+    justify-content: center !important;
+    width: 70%;
+    padding: 24px;
     background-color: #F6F6F6;
-    width: 100%;
-    border: none;
-    max-height: 200px;
-    min-height: 200px;
-    outline: none;
-    padding: 20px;
-    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    color: black;
     font-family: 'Arial';
     font-style: normal;
-    font-size: 19px;
+    font-size: 18px;
+    margin: auto;
+    margin-top: 40px;
+    outline: none;
 }
 
 .avatar-img {
-    margin-top:3%;
+    margin-top: 10px;
     border-radius: 50%;
     background-color: #F6F6F6;
     display:block;
@@ -68,3 +104,4 @@
     width: 150px;
     height:150px;
 }
+
