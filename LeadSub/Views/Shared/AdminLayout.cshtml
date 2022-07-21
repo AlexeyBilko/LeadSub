@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LeadSub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/mainpage.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LeadSub.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="/" class="layout-logo">Lead<span style="color: #3362DB">Sub</span></a>
+            <div class="mean-toggle"></div>
+            <nav>
+                <ul>
+                    <li><a class="menuitem auth_menuitem" asp-controller="SubPages" asp-action="MySubPages">MySubPages</a></li>
+                    <li><a class="menuitem auth_menuitem" href="/">Admin</a></li>
+                    <li><a class="menuitem auth_menuitem" href="/">Links Page</a></li>
+                    <li><a class="menuitem auth_menuitem" href="~/Account/AccountInfo">Account</a></li>
+                    <li class="top-main-button top-main-button-auth"><a class="main-button-text" href="~/SubPages/CreateSubPage">Create Page</a></li>
+                </ul>
+            </nav>
+            <div class="clear"></div>
+        </header>
+    
+        <script
+          src="https://code.jquery.com/jquery-3.4.1.js"
+          integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+          crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">
+                  $(document).ready(function()
+                  {
+                      $('.mean-toggle').click(function()
+                    {
+                          $('.mean-toggle').toggleClass('active')
+                          $('nav').toggleClass('active')
+                    })
+                  })
+        </script>
+    
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        <footer>
+            <div class="footer-logo">
+                <a href="/" class="footer-main-logo">Lead<span style="color: #3362DB">Sub</span></a>
+            </div>
+            <div class="col-xxl-4 make-center">
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="/images/instagram-logo.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">Instagram</p>
+                    </a>
+
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="~/images/youtube-logo.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">YouTube</p>
+                    </a>
+        
+                    <a href="/" class="social-media-link d-flex justify-content-md-start">
+                        <div class="social-media-image">
+                            <img src="~/images/Twitter-logo.svg.png"/>
+                        </div>
+                        <p class="ms-2 social-media-title">Twitter</p>
+                    </a>
+            </div>
+
+            <div class="footer-links">
+                <div>
+                    <a href="/" class="footer-link">FAQ</a>
+                </div>
+                <div>
+                    <a href="/" class="footer-link">Pricing</a>
+                </div>
+                <div>
+                    <a href="/" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
