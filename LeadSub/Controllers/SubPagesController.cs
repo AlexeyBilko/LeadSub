@@ -19,7 +19,8 @@ namespace LeadSub.Controllers
         }
         public async Task<IActionResult> MySubPages()
         {
-            IEnumerable<SubPageDTO> res = await subPagesService.GetAllAsync();
+            UserDTO user = await userManager.GetUser(User);
+            IEnumerable<SubPageDTO> res = await subPagesService.GetMyAsync(user.Id);
             return View(res);
         }
 

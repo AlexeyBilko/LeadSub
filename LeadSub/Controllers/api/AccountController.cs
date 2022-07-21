@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace LeadSub.Controllers.api
@@ -35,13 +36,24 @@ namespace LeadSub.Controllers.api
             var res = await signInManager.PasswordSignInAsync(user,model.Password,false,false);
             if (res.Succeeded)
             {
+                //var tokenDescriptor = new SecurityTokenDescriptor
+                //{
+                //    Subject = new ClaimsIdentity(new Claim[]
+                //    {
+                //        new Claim(ClaimTypes.Name, user.Id.ToString())
+                //    }),
+                //    Expires = DateTime.UtcNow.AddDays(7)
+                //};
+
+                var claims = new Claim[] { new Claim(ClaimTypes.Name, user.Id) };
+
                 var timeNow = DateTime.Now;
                 var token = new JwtSecurityToken
                 (
                     issuer: AuthOptions.ISSUER,
                     audience:AuthOptions.AUDIENCE,
                     notBefore:timeNow,
-                    claims:User.Claims,
+                    claims: claims,
                     expires:timeNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                     signingCredentials:new SigningCredentials(AuthOptions.GetSymetricKey(),SecurityAlgorithms.HmacSha256)
                 );
