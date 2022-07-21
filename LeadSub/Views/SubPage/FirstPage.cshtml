@@ -1,23 +1,33 @@
 ﻿@model BLL.DTO.SubPageDTO
 @{
-    Layout = null;
+    Layout = "/Views/Shared/FormLayout.cshtml";
 }
 <head>
     <title>@Model.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-     <link rel="stylesheet" href="~/css/subpage.css"/>
+    <link rel="stylesheet" href="~/css/subpage.css"/>
 </head>
 
-<div class="container-fluid col-xxl-6">
-     <img src="@Model.MainImage" class="d-block me-auto ms-auto" style="padding:2%;"/>
-  
-    <h3 class="mt-3 text-center">@Model.Header</h3>
- <div class="description-area text-left">
-    @Model.Description
- </div>
- <form asp-action="Initial" asp-controller="SubPage" method="get">
-     <input name="id" asp-for="@Model.Id" type="hidden"/>
-     <button class="submit-btn ms-auto me-auto d-block" type="submit">Button to Follow</button>
- </form>
-</div>
+  <div class="content">
+    <div class="container">
+      <div class="row justify-content-center">  
+           <div class="row main-image-fp">
+               <img src="@Model.MainImage" style="padding:2%; max-width: 100%; max-height: 400px;"/>
+           </div>
+           <div class="row">
+               <div class="header-center">@Model.Header</div>
+           </div>
+           <div class="row">
+               <div class="description-area ">
+                  @Model.Description
+               </div>
+           </div>
+           <form asp-action="Initial" asp-controller="SubPage" method="get">
+               <input name="id" asp-for="@Model.Id" type="hidden"/>
+               <div class="row">
+                   <button class="submit-btn" type="submit">Button to Follow</button>
+               </div>
+           </form>
+      </div>
+    </div>
+  </div>
     
