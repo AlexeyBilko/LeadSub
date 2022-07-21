@@ -1,6 +1,13 @@
 ﻿@model LeadSub.Models.ViewModels.AccountSettingsViewModel
 @{
-    Layout = "~/Views/Shared/AuthenticatedLayout.cshtml";
+        if (User.IsInRole("Admin"))
+        {
+            Layout = "/Views/Shared/AdminLayout.cshtml";
+        }
+        else if (User.IsInRole("User")) 
+        {
+            Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
+        }
 }
 
 <head>

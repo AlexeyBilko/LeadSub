@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LeadSub.Controllers
 {
+    [Authorize(Roles ="Admin,User")]
     public class SubPagesController : Controller
     {
         SubPagesService subPagesService;

@@ -1,5 +1,12 @@
 ﻿@{
-    Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
+         if (User.IsInRole("Admin"))
+        {
+            Layout = "/Views/Shared/AdminLayout.cshtml";
+        }
+        else if (User.IsInRole("User")) 
+        {
+            Layout = "/Views/Shared/AuthenticatedLayout.cshtml";
+        }
 
 }
 @model LeadSub.Models.ViewModels.SubPageViewModel

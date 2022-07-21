@@ -131,8 +131,12 @@ namespace LeadSub.Controllers
                     var result = await userService.CreateAsync(user,model.Password);
                     if (result.Succeeded)
                     {
-                        await signInService.SignInWithEmailAsync(model.Email,model.Password);
-                        return RedirectToAction("Index", "Home");
+                        var roleRes = await userService.AddToRoleAsync(user.Id,"User");
+                        if (roleRes.Succeeded)
+                        {
+                            await signInService.SignInWithEmailAsync(model.Email, model.Password);
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                     else
                     {
@@ -160,7 +164,6 @@ namespace LeadSub.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ConfirmEmailViewModel model)
         {
-
             return View("RestorePassword", new RestorePasswordViewModel()
             {
                 Email=model.Email
